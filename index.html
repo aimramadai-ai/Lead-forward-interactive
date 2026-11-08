@@ -209,7 +209,6 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="text-[11px] font-bold tracking-widest uppercase text-cyan-400">RAMEDA · AIM TASKFORCE</span>
-            <span class="hidden sm:inline-block text-[10px] px-2 py-0.5 rounded-full bg-purple-500/20 border border-purple-400/30 text-purple-200 font-semibold" id="navSubtitleBadge">Dr. Basant Blueprint</span>
           </div>
           <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-white flex items-center gap-1.5">
             <span>LEAD</span>
@@ -218,7 +217,7 @@
         </div>
       </div>
 
-      <!-- Right Controls: Mode Switcher (when logged in) + Language Toggle -->
+      <!-- Right Controls: Mode Switcher + Language Toggle -->
       <div class="flex items-center gap-2 sm:gap-3">
         <!-- Dual-Entry Door Switcher (Always Visible: Open Participant Door + Locked Admin Door) -->
         <div id="headerModeSwitcher" class="flex items-center bg-slate-900/90 p-1 rounded-xl border border-purple-500/30">
@@ -228,7 +227,7 @@
           </button>
           <button onclick="switchAppFace('trainer')" id="btnFaceTrainer" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 text-slate-300 hover:text-white">
             <i id="trainerLockIcon" class="fa-solid fa-lock text-amber-400"></i>
-            <span data-i18n="navTrainerFace">Dr. Basant Hub</span>
+            <span data-i18n="navTrainerFace">Admin Hub</span>
             <span id="headerSubmissionCount" class="px-1.5 py-0.2 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-[10px]">0</span>
           </button>
         </div>
@@ -376,10 +375,10 @@
 
           <!-- Role Security Note -->
           <div class="p-3 rounded-xl border border-amber-500/30 bg-amber-950/20 flex items-center gap-3">
-            <i class="fa-solid fa-user-doctor text-amber-400 text-lg shrink-0"></i>
+            <i class="fa-solid fa-shield-halved text-amber-400 text-lg shrink-0"></i>
             <div class="text-[11px] text-slate-300 leading-relaxed">
-              <strong class="text-amber-300 block" data-i18n="modeTrainerShort">Dr. Basant & AIM Taskforce Hub</strong>
-              <span data-i18n="loginAdminNote">Unlocks live District gap clustering, hidden psychological objectives, and Focus Group prescriptions.</span>
+              <strong class="text-amber-300 block" data-i18n="modeTrainerShort">AIM Taskforce Analytics Hub</strong>
+              <span data-i18n="loginAdminNote">Unlocks live District gap clustering, real user data records, and Focus Group prescriptions.</span>
             </div>
           </div>
 
@@ -406,37 +405,33 @@
   </main>
 
   <!-- ========================================================================= -->
-  <!-- VIEW 2: FACE 1 — OPEN PARTICIPANT 10-STAGE REFLECTION JOURNEY             -->
+  <!-- VIEW 2: FACE 1 — PARTICIPANT 10-STAGE REFLECTION JOURNEY                  -->
   <!-- ========================================================================= -->
-  <section id="viewParticipantJourney" class="py-6 px-3 sm:px-6 max-w-xl mx-auto">
-    
-    <!-- Progress Top Bar (Visible on Stages 1 to 10) -->
-    <div id="stageProgressHeader" class="hidden neon-card rounded-2xl p-3.5 mb-5">
+  <section id="viewParticipantJourney" class="py-6 px-3 sm:px-6 max-w-2xl mx-auto">
+    <!-- Progress Bar Header (Hidden on Stage 0 Welcome Screen) -->
+    <div id="stageProgressHeader" class="hidden neon-card rounded-2xl p-3.5 sm:p-4 mb-5">
       <div class="flex items-center justify-between gap-2 mb-2.5">
-        <button onclick="navigateStage(-1)" class="w-8 h-8 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-cyan-400/30 flex items-center justify-center text-cyan-300 transition">
-          <i class="fa-solid fa-arrow-left rtl:rotate-180 text-xs"></i>
+        <div class="flex items-center gap-2">
+          <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 text-xs font-extrabold" id="stageCounterPill">
+            1 / 10
+          </span>
+          <span id="progressParticipantBadge" class="text-xs font-semibold text-slate-300 truncate max-w-[180px] sm:max-w-xs"></span>
+        </div>
+        <button type="button" onclick="jumpToStage(0)" class="text-xs text-slate-400 hover:text-cyan-300 flex items-center gap-1 transition">
+          <i class="fa-solid fa-house text-[10px]"></i>
+          <span>Welcome</span>
         </button>
-        <div class="text-center">
-          <span class="text-[11px] font-bold uppercase tracking-widest text-cyan-400 block" id="progressStageTopLabel">LEAD FORWARD</span>
-          <span class="text-xs font-semibold text-slate-300" id="progressParticipantBadge"></span>
-        </div>
-        <div class="px-3 py-1 rounded-full bg-purple-950/80 border border-purple-400/50 text-xs font-extrabold text-cyan-300" id="stageCounterPill">
-          1 / 10
-        </div>
       </div>
-      <!-- 10 Interactive Progress Dots -->
-      <div id="progressDotsContainer" class="grid grid-cols-10 gap-1.5 pt-1">
-        <!-- Rendered dynamically -->
-      </div>
+      <!-- 10 Interactive Stage Dots -->
+      <div id="progressDotsContainer" class="grid grid-cols-10 gap-1.5"></div>
     </div>
 
-    <!-- DYNAMIC STAGE CONTAINER -->
+    <!-- Dynamic Stage Container (Stages 0 to 10) -->
     <div id="stageContentContainer"></div>
-
   </section>
 
   <!-- ========================================================================= -->
-  <!-- VIEW 3: FACE 2 — DR. BASANT / AIM TASKFORCE FOCUS GROUP & GAP ANALYTICS   -->
+  <!-- VIEW 3: FACE 2 — FOCUS GROUP & GAP ANALYTICS HUB                          -->
   <!-- ========================================================================= -->
   <section id="viewTrainerHub" class="hidden py-6 px-3 sm:px-6 max-w-7xl mx-auto space-y-6">
     
@@ -444,34 +439,40 @@
     <div class="neon-card-gold rounded-3xl p-5 sm:p-7 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
       <div>
         <div class="flex flex-wrap items-center gap-2 mb-2">
-          <span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-extrabold uppercase tracking-wider">
-            <i class="fa-solid fa-user-shield me-1"></i>
-            <span data-i18n="trainerBadge">Trainer Only — Dr. Basant Executive Coaching Blueprint</span>
-          </span>
           <span class="px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 text-xs font-bold">
             Rameda · AIM Taskforce
+          </span>
+          <span id="dbConnectionBadge" class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Real-Time Database Active</span>
           </span>
         </div>
         <h2 class="text-2xl sm:text-3xl font-black text-white" data-i18n="trainerHubTitle">
           Leadership Gap & District Focus Group Intelligence Hub
         </h2>
         <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-3xl" data-i18n="trainerHubDesc">
-          Automatically aggregates manager reflections by District/Area, detects hidden behavioral contradictions (such as Micromanagement under target pressure), and prescribes targeted Focus Groups.
+          Automatically captures real user reflections by District/Area, detects hidden behavioral gaps, and prescribes targeted Focus Groups.
         </p>
       </div>
 
       <!-- Action Buttons -->
       <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+        <!-- Database & Webhook Link Setup -->
+        <button onclick="openDatabaseConfigModal()" class="px-3.5 py-2.5 rounded-xl border border-cyan-400/50 bg-cyan-950/70 hover:bg-cyan-900/80 text-xs font-extrabold text-cyan-200 flex items-center gap-2 transition shadow-sm">
+          <i class="fa-solid fa-plug-circle-bolt text-cyan-400"></i>
+          <span data-i18n="btnDbConfig">Database & Link Setup</span>
+        </button>
+
         <!-- Toggle Demo Seed Data -->
         <button onclick="toggleDemoDataSeed()" id="btnToggleDemoSeed" class="px-3.5 py-2.5 rounded-xl border border-purple-400/40 bg-purple-950/60 hover:bg-purple-900/70 text-xs font-bold text-purple-200 flex items-center gap-2 transition">
           <i class="fa-solid fa-database text-purple-400"></i>
-          <span id="demoSeedBtnText">Showing: Live + Sample Rameda Data</span>
+          <span id="demoSeedBtnText">Showing: Real Users Only</span>
         </button>
 
         <!-- Edit Login Clarifications -->
-        <button onclick="openClarificationsModal()" class="px-3.5 py-2.5 rounded-xl border border-cyan-400/40 bg-cyan-950/60 hover:bg-cyan-900/70 text-xs font-bold text-cyan-200 flex items-center gap-2 transition">
+        <button onclick="openClarificationsModal()" class="px-3.5 py-2.5 rounded-xl border border-slate-600 bg-slate-900/80 hover:bg-slate-800 text-xs font-bold text-slate-200 flex items-center gap-2 transition">
           <i class="fa-solid fa-pen-to-square"></i>
-          <span data-i18n="btnEditClarifications">Login Text</span>
+          <span data-i18n="btnEditClarifications">Welcome Text</span>
         </button>
 
         <!-- Export CSV -->
@@ -542,23 +543,19 @@
           </p>
           <div id="pressureDiagnosticsBox" class="space-y-3"></div>
         </div>
-        <div class="mt-4 p-3.5 rounded-2xl bg-cosmic-950/90 border border-amber-500/30 text-xs text-amber-200 leading-relaxed">
-          <strong class="text-amber-400 block mb-0.5"><i class="fa-solid fa-lightbulb me-1"></i> <span data-i18n="basantNoteTitle">Dr. Basant Coaching Insight:</span></strong>
-          <span data-i18n="basantNoteStage8">Managers selecting Option A (Indirect route audit) or Option B (Live Location demand) while claiming "Empowerment" require a practical Coaching & Trust under Pressure Focus Group.</span>
-        </div>
       </div>
     </div>
 
-    <!-- SECTION C: INDIVIDUAL MANAGER SUBMISSIONS & PSYCHOLOGICAL BLUEPRINT LENS -->
+    <!-- SECTION C: INDIVIDUAL MANAGER SUBMISSIONS -->
     <div class="neon-card rounded-3xl p-5 sm:p-7">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 mb-5 border-b border-cyan-500/20">
         <div>
           <h3 class="text-lg sm:text-xl font-extrabold text-white flex items-center gap-2">
             <i class="fa-solid fa-users-viewfinder text-cyan-400"></i>
-            <span data-i18n="tableManagersTitle">Individual Manager Reflections & Psychological Gap Profiles</span>
+            <span data-i18n="tableManagersTitle">Real User Submissions & Leadership Gap Profiles</span>
           </h3>
           <p class="text-xs text-slate-400 mt-0.5" data-i18n="tableManagersSub">
-            Click "Inspect Full Profile & Coaching Lens" on any manager to view all 10 stages with Dr. Basant's psychological objectives
+            Click "Inspect Full Profile" on any user to view all 10 stage responses in detail
           </p>
         </div>
 
@@ -632,7 +629,7 @@
   <div id="modalEditClarifications" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6">
     <div class="neon-card rounded-3xl max-w-xl w-full p-5 sm:p-6 border border-cyan-400/40 space-y-4">
       <div class="flex items-center justify-between border-b border-cyan-500/20 pb-3">
-        <h3 class="text-base sm:text-lg font-extrabold text-white" data-i18n="modalClarifTitle">Customize Login Screen Clarifications</h3>
+        <h3 class="text-base sm:text-lg font-extrabold text-white" data-i18n="modalClarifTitle">Customize Welcome & Login Clarifications</h3>
         <button onclick="closeClarificationsModal()" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center">
           <i class="fa-solid fa-xmark"></i>
         </button>
@@ -654,6 +651,99 @@
     </div>
   </div>
 
+  <!-- ========================================================================= -->
+  <!-- MODAL 4: DATABASE & GOOGLE SHEETS / WEBHOOK CONNECTOR SETUP               -->
+  <!-- ========================================================================= -->
+  <div id="modalDatabaseConfig" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="neon-card rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-cyan-400/50">
+      <div class="p-4 sm:p-6 border-b border-cyan-500/20 flex items-center justify-between bg-cosmic-950/90">
+        <div>
+          <span class="text-[11px] font-bold uppercase tracking-widest text-cyan-400 block">REAL-TIME DATA PIPELINE</span>
+          <h3 class="text-lg sm:text-xl font-black text-white">Database & JavaScript Live Connector</h3>
+        </div>
+        <button onclick="closeDatabaseConfigModal()" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="p-4 sm:p-6 overflow-y-auto space-y-5 text-xs sm:text-sm">
+        <!-- 1. Active Built-in Database Status -->
+        <div class="p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="font-extrabold text-emerald-300 flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i>
+              1. Built-In Cloud Firestore + LocalStorage Database (Active)
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold" id="dbModalUserCount">0 Real Users</span>
+          </div>
+          <p class="text-slate-300 text-xs leading-relaxed">
+            Every time a real participant enters their <strong>Name</strong> and <strong>District</strong> on the Welcome Screen and clicks <em>Begin My Journey</em>, JavaScript immediately creates a unique User ID (<code class="text-cyan-300">user_...</code>) and updates their answers live at every stage (1 to 10).
+          </p>
+        </div>
+
+        <!-- 2. External Webhook / Google Sheets Connector -->
+        <div class="p-4 rounded-2xl bg-cosmic-900/90 border border-cyan-500/35 space-y-3">
+          <div class="font-extrabold text-cyan-300 flex items-center gap-2">
+            <i class="fa-solid fa-table"></i>
+            2. Link External Database (Google Sheets / REST Webhook URL)
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Want every user submission to also save directly into your own <strong>Google Sheet</strong> or external server? Paste your Google Apps Script Web App URL (or any Webhook URL) below. JavaScript will automatically <code class="text-amber-300">POST</code> every real user's JSON record to this URL.
+          </p>
+          <div>
+            <label class="block text-xs font-bold text-slate-200 mb-1">Webhook / Google Apps Script URL (Optional)</label>
+            <div class="flex flex-col sm:flex-row gap-2">
+              <input
+                type="url"
+                id="inputWebhookUrl"
+                placeholder="https://script.google.com/macros/s/.../exec"
+                class="neon-input flex-1 rounded-xl px-3.5 py-2.5 text-xs font-mono"
+              />
+              <button onclick="saveWebhookUrlConfig()" class="btn-neon-primary px-4 py-2.5 rounded-xl text-xs font-extrabold text-white shrink-0">
+                Save & Connect URL
+              </button>
+            </div>
+          </div>
+
+          <!-- Collapsible Google Apps Script Code to Copy -->
+          <div class="rounded-xl bg-cosmic-950 p-3 border border-slate-800 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-amber-300">How to create a free Google Sheet Database in 60 seconds:</span>
+              <button onclick="copyAppsScriptCode()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 text-[11px] font-bold">
+                <i class="fa-regular fa-copy me-1"></i>Copy Apps Script
+              </button>
+            </div>
+            <ol class="list-decimal list-inside text-[11px] text-slate-400 space-y-1">
+              <li>Open a new Google Sheet &rarr; click <strong>Extensions &gt; Apps Script</strong>.</li>
+              <li>Paste the code below, click <strong>Deploy &gt; New Deployment &gt; Web App</strong> (set <em>Who has access</em> to <strong>Anyone</strong>).</li>
+              <li>Copy the generated Web App URL and paste it in the box above!</li>
+            </ol>
+            <pre id="appsScriptSnippet" class="text-[10px] font-mono text-cyan-200 bg-black/60 p-2.5 rounded-lg overflow-x-auto">function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = JSON.parse(e.postData.contents);
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(["UserID","Timestamp","Status","Name","District","Stage1_Peak","Stage2_Mirror","Stage3_ShapedBy","Stage3_PocketLesson","Stage4_Timeline","Stage5_CoreValue","Stage5_TeamBelief","Stage6_Strengths","Stage6_Pressure","Stage7_Courage","Stage7_Legacy","Stage8_Scenario","Stage9_Open","Stage9_BlindSpot","Stage9_Facade","Stage9_Potential"]);
+  }
+  sheet.appendRow([data.id, data.submittedAt, data.status, data.name, data.district, data.stage1Peak, data.stage2Reflection, data.stage3ShapedBy, data.stage3PocketLesson, data.stage4Lesson, data.stage5CoreValue, data.stage5TeamBelief, data.stage6Strengths, data.stage6PressureChoice, data.stage7CourageNextMonth, data.stage7Legacy, data.stage8Option, data.stage9OpenArea, data.stage9BlindSpotFeedback, data.stage9FacadeHiddenGood, data.stage9UndiscoveredPotential]);
+  return ContentService.createTextOutput(JSON.stringify({status:"ok"})).setMimeType(ContentService.MimeType.JSON);
+}</pre>
+          </div>
+        </div>
+
+        <!-- 3. Manage Real User Records -->
+        <div class="p-4 rounded-2xl bg-rose-950/20 border border-rose-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <div class="font-bold text-rose-300 text-xs">Clear Local Browser Cache</div>
+            <div class="text-[11px] text-slate-400">Removes locally cached test submissions from this browser.</div>
+          </div>
+          <button onclick="clearLocalRealUsersCache()" class="px-3.5 py-2 rounded-xl bg-rose-900/50 hover:bg-rose-800 border border-rose-500/40 text-rose-200 text-xs font-bold shrink-0">
+            <i class="fa-solid fa-trash-can me-1"></i>Clear Local Cache
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- TOAST NOTIFICATION -->
   <div id="toastNotification" class="fixed bottom-5 end-5 z-50 hidden px-4 py-3 rounded-2xl neon-card border border-cyan-400/50 text-xs sm:text-sm font-bold text-white shadow-2xl flex items-center gap-2.5">
     <i class="fa-solid fa-circle-check text-cyan-400 text-base"></i>
@@ -661,27 +751,40 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- APPLICATION LOGIC & BILINGUAL BLUEPRINT ENGINE                            -->
+  <!-- APPLICATION LOGIC & REAL-TIME DATABASE ENGINE                             -->
   <!-- ========================================================================= -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, collection, doc, setDoc, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getFirestore, collection, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     // -------------------------------------------------------------------------
-    // 1. STATE & CONFIGURATION
+    // 1. STATE & REAL USER DATABASE CONFIGURATION
     // -------------------------------------------------------------------------
     let currentLang = 'en'; // 'en' or 'ar'
     let isAuthenticated = false;
     let activeFace = 'participant'; // 'participant' or 'trainer'
     let currentStage = 0; // 0 = Welcome Onboarding, 1..10 = Stages 1..10
-    let includeDemoSeed = true;
+    let includeDemoSeed = false; // Default to REAL USERS ONLY
     let liveFirestoreSubmissions = [];
+    let localRealUsers = [];
+    let customWebhookUrl = localStorage.getItem('rameda_lead_forward_webhook_url') || '';
     let currentUser = null;
     let db = null;
     const appId = typeof __app_id !== 'undefined' ? __app_id : 'rameda-lead-forward-aim';
+    const LOCAL_DB_KEY = 'rameda_lead_forward_real_users_v1';
 
-    // Default Login Clarifications (from Dr. Basant Blueprint & Screenshots)
+    // Load cached real users from localStorage immediately so no real user is ever lost
+    try {
+      const savedLocal = localStorage.getItem(LOCAL_DB_KEY);
+      if (savedLocal) {
+        localRealUsers = JSON.parse(savedLocal);
+      }
+    } catch (e) {
+      console.warn('Could not read localStorage DB:', e);
+    }
+
+    // Default Login Clarifications
     let loginClarifications = {
       en: [
         "This is a reflection journey, not an exam — answers are never converted into grades or evaluations.",
@@ -695,10 +798,13 @@
       ]
     };
 
-    // Participant Form State
-    let formState = {
+    // Participant Form State (Each real participant gets a unique `id` upon starting)
+    let formState = (window.formState = {
+      id: '',
       name: '',
       district: '',
+      status: 'In Progress',
+      lastStageReached: 0,
       // Stage 1: Leadership Mountain
       stage1Peak: '',
       stage1Note: '',
@@ -731,21 +837,21 @@
       stage7Legacy: '',
       // Stage 8: Values Under Pressure
       stage8Option: '', // 'A', 'B', or 'C'
-      // Stage 9: Johari Window (Combines Blueprint Q9 & Q10)
+      // Stage 9: Johari Window
       stage9OpenArea: '',
       stage9BlindSpotFeedback: '',
       stage9FacadeHiddenGood: '',
       stage9UndiscoveredPotential: '',
       submittedAt: null
-    };
+    });
 
     // -------------------------------------------------------------------------
-    // 2. BILINGUAL DICTIONARY & DR. BASANT PSYCHOLOGICAL OBJECTIVES
+    // 2. BILINGUAL DICTIONARY
     // -------------------------------------------------------------------------
     const i18n = {
       en: {
         navParticipantFace: "10-Stage Journey",
-        navTrainerFace: "Dr. Basant Hub",
+        navTrainerFace: "Admin Hub",
         cloudLive: "Live Dataset",
         loginBadgeRight: "INTERACTIVE REFLECTION · 10 STAGES",
         heroPreTitle: "YOUR JOURNEY STARTS HERE",
@@ -755,21 +861,21 @@
         statStages: "STAGES",
         statPossibilities: "POSSIBILITIES",
         statYou: "YOU",
-        loginGateTitle: "Doctor / Admin Security Gate",
-        loginGateSub: "Enter the authorized AIM Taskforce credentials to unlock Dr. Basant's Focus Group Hub",
+        loginGateTitle: "Admin Security Gate",
+        loginGateSub: "Enter the authorized AIM Taskforce credentials to unlock the Focus Group Hub",
         labelUsername: "Username (Capitalized AIM)",
         labelPassword: "Password",
         labelDestinationMode: "Select Interface Face",
         modeParticipantShort: "Participant Journey",
         modeParticipantSub: "10-Stage Reflection",
-        modeTrainerShort: "Dr. Basant & AIM Taskforce Hub",
+        modeTrainerShort: "AIM Taskforce Analytics Hub",
         modeTrainerSub: "Gaps & Focus Groups",
-        loginAdminNote: "Unlocks live District gap clustering, hidden psychological objectives, and Focus Group prescriptions.",
+        loginAdminNote: "Unlocks live District gap clustering, real user data records, and Focus Group prescriptions.",
         btnUnlock: "UNLOCK FOCUS GROUP HUB",
         btnBackToParticipant: "Back to Open Participant Entry",
-        trainerBadge: "Trainer Only — Dr. Basant Executive Coaching Blueprint",
         trainerHubTitle: "Leadership Gap & District Focus Group Intelligence Hub",
-        trainerHubDesc: "Automatically aggregates manager reflections by District/Area, detects hidden behavioral contradictions (such as Micromanagement under target pressure), and prescribes targeted Focus Groups.",
+        trainerHubDesc: "Automatically aggregates real user reflections by District/Area, detects hidden behavioral contradictions, and prescribes targeted Focus Groups.",
+        btnDbConfig: "Database & Link Setup",
         btnEditClarifications: "Welcome Text",
         btnExportCSV: "Export Excel / CSV",
         btnExportJSON: "JSON Dataset",
@@ -780,17 +886,15 @@
         chartPeaksSub: "Measures the #1 self-reported training priority across managers",
         chartPressureTitle: "Stage 8 & 6: Hidden Micromanagement vs. Trust",
         chartPressureSub: "Reveals behavioral contradiction between stated values and actual reaction during target-closing week",
-        basantNoteTitle: "Dr. Basant Psychological Objective:",
-        basantNoteStage8: "Managers selecting Option A (Indirect route audit) or Option B (Live Location demand) while claiming 'Trust & Empowerment' require a targeted Coaching & Delegation Focus Group.",
-        tableManagersTitle: "Individual Manager Reflections & Psychological Gap Profiles",
-        tableManagersSub: "Click 'Inspect Profile & Coaching Lens' on any manager to view all 10 stages alongside Dr. Basant's psychological notes",
-        modalInspectorPre: "EXECUTIVE COACHING & GAP DIAGNOSTIC PROFILE",
+        tableManagersTitle: "Real User Submissions & Leadership Gap Profiles",
+        tableManagersSub: "Click 'Inspect Full Profile' on any participant to view all 10 stage responses",
+        modalInspectorPre: "PARTICIPANT 10-STAGE REFLECTION PROFILE",
         btnReviewAnswers: "Review My Answers",
         modalClarifTitle: "Customize Welcome & Login Clarifications"
       },
       ar: {
         navParticipantFace: "رحلة الـ 10 مراحل",
-        navTrainerFace: "لوحة د. بسنت",
+        navTrainerFace: "لوحة التحكم",
         cloudLive: "تغذية البيانات نشطة",
         loginBadgeRight: "انعكاس تفاعلي · 10 محطات قيادية",
         heroPreTitle: "رحلتك تبدأ من هنا",
@@ -800,21 +904,21 @@
         statStages: "مراحل",
         statPossibilities: "إمكانيات",
         statYou: "أنت",
-        loginGateTitle: "بوابة دخول المدرب (د. بسنت)",
+        loginGateTitle: "بوابة دخول المشرفين (AIM)",
         loginGateSub: "أدخل اسم المستخدم (AIM) وكلمة المرور لفتح لوحة تحليل الفجوات والـ Focus Groups",
         labelUsername: "اسم المستخدم (بحروف كبيرة AIM)",
         labelPassword: "كلمة المرور",
         labelDestinationMode: "اختر واجهة الدخول",
         modeParticipantShort: "واجهة القادة والمشاركين",
         modeParticipantSub: "رحلة الـ 10 مراحل التفاعلية",
-        modeTrainerShort: "لوحة د. بسنت وفريق AIM",
+        modeTrainerShort: "لوحة تحليلات فريق AIM",
         modeTrainerSub: "تحليل الفجوات والـ Focus Groups",
-        loginAdminNote: "تفتح لوحة تجميع الفجوات حسب المنطقة، الأهداف السيكولوجية، وتوصيات الـ Focus Groups.",
-        btnUnlock: "فتح لوحة د. بسنت للمدربين",
+        loginAdminNote: "تفتح لوحة تجميع الفجوات حسب المنطقة، سجلات المشاركين الفعليين، وتوصيات الـ Focus Groups.",
+        btnUnlock: "فتح لوحة تحليل الفجوات",
         btnBackToParticipant: "العودة لواجهة المشاركين المفتوحة",
-        trainerBadge: "للمدرب فقط — د. بسنت | Executive Coaching Blueprint",
         trainerHubTitle: "مركز تحليل الفجوات القيادية وتحديد الـ Focus Groups بالمناطق",
-        trainerHubDesc: "يجمع إجابات المديرين تلقائياً حسب المنطقة (District / Area)، ويكشف الفجوات السلوكية المبطنة (مثل الـ Micromanagement وقت ضغط التارجت) لتحديد الـ Focus Groups المطلوبة ومكانها.",
+        trainerHubDesc: "يجمع إجابات المشاركين الفعليين تلقائياً حسب المنطقة (District / Area)، ويكشف الفجوات السلوكية لتحديد الـ Focus Groups المطلوبة ومكانها.",
+        btnDbConfig: "إعدادات قاعدة البيانات والربط",
         btnEditClarifications: "تعديل نص الترحيب",
         btnExportCSV: "تصدير للإكسيل CSV",
         btnExportJSON: "تحميل Dataset JSON",
@@ -825,11 +929,9 @@
         chartPeaksSub: "يقيس الاحتياج التدريبي الأهم الذي ينتظره المديرون مع فرقهم",
         chartPressureTitle: "المرحلة 8 و 6: القيم تحت الضغط مقابل التدخل التفصيلي",
         chartPressureSub: "يكشف التناقض السلوكي بين القيم المعلنة والممارسة الفعلية في أسبوع تقفيل التارجت",
-        basantNoteTitle: "الهدف السيكولوجي (د. بسنت):",
-        basantNoteStage8: "المديرون الذين يختارون التفتيش غير المباشر أو طلب اللايف لوكيشن رغم إعلانهم لقيمة الثقة يحتاجون Focus Group مركزة في التمكين والتفويض تحت الضغط.",
-        tableManagersTitle: "إجابات المديرين التفصيلية مع العدسة السيكولوجية للمدرب",
-        tableManagersSub: "اضغط على 'عرض الملف الكامل والهدف السيكولوجي' لأي مدير لمراجعة إجاباته العشر مع ملاحظات د. بسنت",
-        modalInspectorPre: "ملف الكوتشينج التنفيذي وتشخيص الفجوات القيادية",
+        tableManagersTitle: "سجلات المشاركين الفعليين وتحليل الفجوات القيادية",
+        tableManagersSub: "اضغط على 'عرض الملف الكامل' لأي مشارك لمراجعة إجاباته العشر بالتفصيل",
+        modalInspectorPre: "ملف إجابات المشارك في المراحل العشر",
         btnReviewAnswers: "مراجعة إجاباتي",
         modalClarifTitle: "تعديل رسائل التوضيح على شاشة الترحيب والدخول"
       }
@@ -894,48 +996,8 @@
       'HQ / Corporate'
     ];
 
-    // Dr. Basant's Hidden Psychological Objectives per Question
-    const PSYCHOLOGICAL_OBJECTIVES = {
-      stage1: {
-        en: "Trainer Only — Dr. Basant: Measures the #1 priority training need for each manager, enabling you to determine which of the 5 peaks requires double focus with this specific manager and their district.",
-        ar: "للمدرب فقط - د. بسنت: الهدف من السؤال ده يقيس الاحتياج التدريبي الأهم عند كل مدير، عشان تكوني قادرة تحددي أنهي موضوع من الخمسة هيحتاج تركيز مضاعف مع المدير ده تحديداً."
-      },
-      stage2: {
-        en: "Trainer Only — Dr. Basant: Measures Self-Awareness depth and the manager's ability to critique themselves without defensiveness, implicitly revealing past and current negative management habits.",
-        ar: "للمدرب فقط - د. بسنت: الهدف من السؤال ده يقيس الـ Self-awareness depth وقدرة المدير على نقد ذاته بدون دفاعية، وهيكشف العادات السلبية السابقة والحالية اللي بيعترف بيها ضمنياً."
-      },
-      stage3: {
-        en: "Trainer Only — Dr. Basant: Uncovers the unconscious Role Model the manager imitates when leading their team, clarifying the root of their management style.",
-        ar: "للمدرب فقط - د. بسنت: الهدف من السؤال ده يطلع الـ Role Model اللي المدير بيقلده في إدارته للتيم لا إرادياً، وممكن يوضح طريقته في الإدارة نوعاً ما حسب الإجابة."
-      },
-      stage4: {
-        en: "Trainer Only — Dr. Basant: Verifies that the manager completed the Timeline Mapping exercise on their career path and reveals how they handle crises and their level of Resilience.",
-        ar: "للمدرب فقط - د. بسنت: الهدف من السؤال ده نتأكد إن المدير عمل تمرين الـ Timeline Mapping على مسيرته، وبيكشفلنا إزاي بيتعامل مع الأزمات والـ Resilience بتاعته."
-      },
-      stage5: {
-        en: "Trainer Only — Dr. Basant: Applies your 3-question slide and measures the alignment between how the manager sees themselves and the actual impression left on their team (Team Culture Impact).",
-        ar: "للمدرب فقط - د. بسنت: الهدف من السؤال ده بيطبق شريحة الأسئلة الثلاثة بتاعتك، وبيقيس مدى تطابق رؤية المدير لنفسه مع الانطباع اللي سايبه فعلاً في التيم بتاعه (Team Culture Impact)."
-      },
-      stage6: {
-        en: "Trainer Only — Dr. Basant: Diagnoses the manager's current baseline accurately and reveals their true behavior under pressure to identify their leadership archetype.",
-        ar: "للمدرب فقط - د. بسنت: الهدف من السؤال ده بيشخص نقطة الانطلاق الحالية للمدير بدقة، وبيكشف سلوكه الحقيقي تحت الضغط عشان نحدد نمطه القيادي."
-      },
-      stage7: {
-        en: "Trainer Only — Dr. Basant: Measures the leadership gap between current reality and ambition, and their ability to set a clear, honest vision between reality and aspiration.",
-        ar: "للمدرب فقط - د. بسنت: الهدف من السؤال ده بيقيس فجوة القيادة بين واقعه وطموحه، وقدرته إنه يحط رؤية واضحة لنفسه بين الواقع والحلم (لو كان صادق في إجابته)."
-      },
-      stage8: {
-        en: "Trainer Only — Dr. Basant: Exposes the behavioral contradiction between stated values and actual practice under target-closing pressure, uncovering hidden Micromanagement behind talk of trust.",
-        ar: "للمدرب فقط - د. بسنت: الهدف من السؤال ده بيكشف التناقض السلوكي بين القيم المعلنة والممارسة الفعلية تحت الضغط، والـ Micromanagement المستخبي ورا كلام الثقة."
-      },
-      stage9: {
-        en: "Trainer Only — Dr. Basant: Measures Coachability (acceptance of constructive criticism), whether they give space for feedback, plus lost Personal Branding inside Rameda (Facade) and Undiscovered Potential to build their development plan on.",
-        ar: "للمدرب فقط - د. بسنت: يقيس مدى تقبل المدير للنقد (Coachability)، ويحط إيدينا على الـ Personal Branding الضايع من المدير جوه شركة Rameda، ويكشف مناطق النمو الكامنة (Undiscovered Potential) لبناء خطة تطويره."
-      }
-    };
-
     // -------------------------------------------------------------------------
-    // 3. REALISTIC SAMPLE RAMEDA MANAGER SEED DATA (FOR IMMEDIATE DEMO ANALYTICS)
+    // 3. REALISTIC SAMPLE RAMEDA MANAGER SEED DATA (OPTIONAL DEMO TOGGLE)
     // -------------------------------------------------------------------------
     const DEMO_SEED_SUBMISSIONS = [
       {
@@ -1378,8 +1440,8 @@
         switchAppFace('trainer');
         showToast(
           currentLang === 'ar'
-            ? 'تم فتح لوحة د. بسنت لتحليل الفجوات والـ Focus Groups بنجاح!'
-            : 'Dr. Basant Focus Group Hub Unlocked!'
+            ? 'تم فتح لوحة تحليل الفجوات والـ Focus Groups بنجاح!'
+            : 'Focus Group Analytics Hub Unlocked!'
         );
       } else {
         errBox.classList.remove('hidden');
@@ -1448,6 +1510,11 @@
       const next = currentStage + delta;
       if (next >= 0 && next <= 10) {
         currentStage = next;
+        formState.lastStageReached = Math.max(formState.lastStageReached || 0, currentStage);
+        // Live-sync real user progress to database at every stage transition
+        if (formState.id && currentStage > 0) {
+          upsertRealUserRecord(false);
+        }
         renderParticipantStage();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
@@ -1460,6 +1527,10 @@
         return;
       }
       currentStage = stageIdx;
+      formState.lastStageReached = Math.max(formState.lastStageReached || 0, currentStage);
+      if (formState.id && currentStage > 0) {
+        upsertRealUserRecord(false);
+      }
       renderParticipantStage();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -1470,35 +1541,39 @@
       const counterPill = document.getElementById('stageCounterPill');
       const participantBadge = document.getElementById('progressParticipantBadge');
 
+      if (!header) return;
+
       if (currentStage === 0) {
         header.classList.add('hidden');
         return;
       }
 
       header.classList.remove('hidden');
-      counterPill.textContent = `${currentStage} / 10`;
-      participantBadge.textContent = `${formState.name} · ${formState.district}`;
+      if (counterPill) counterPill.textContent = `${currentStage} / 10`;
+      if (participantBadge) participantBadge.textContent = `${formState.name} · ${formState.district}`;
 
-      let dotsHtml = '';
-      for (let i = 1; i <= 10; i++) {
-        const isCurrent = i === currentStage;
-        const isCompleted = i < currentStage;
-        dotsHtml += `
-          <button
-            type="button"
-            onclick="jumpToStage(${i})"
-            class="h-2 rounded-full transition-all ${
-              isCurrent
-                ? 'bg-gradient-to-r from-cyan-400 to-amber-400 shadow-sm shadow-cyan-400/60 scale-y-125'
-                : isCompleted
-                ? 'bg-purple-500/80 hover:bg-cyan-400/70'
-                : 'bg-slate-800 hover:bg-slate-700'
-            }"
-            title="Stage ${i}"
-          ></button>
-        `;
+      if (dotsContainer) {
+        let dotsHtml = '';
+        for (let i = 1; i <= 10; i++) {
+          const isCurrent = i === currentStage;
+          const isCompleted = i < currentStage;
+          dotsHtml += `
+            <button
+              type="button"
+              onclick="jumpToStage(${i})"
+              class="h-2 rounded-full transition-all ${
+                isCurrent
+                  ? 'bg-gradient-to-r from-cyan-400 to-amber-400 shadow-sm shadow-cyan-400/60 scale-y-125'
+                  : isCompleted
+                  ? 'bg-purple-500/80 hover:bg-cyan-400/70'
+                  : 'bg-slate-800 hover:bg-slate-700'
+              }"
+              title="Stage ${i}"
+            ></button>
+          `;
+        }
+        dotsContainer.innerHTML = dotsHtml;
       }
-      dotsContainer.innerHTML = dotsHtml;
     }
 
     function renderParticipantStage() {
@@ -1599,7 +1674,7 @@
                   type="text"
                   id="inputParticipantName"
                   value="${escapeHtml(formState.name)}"
-                  oninput="formState.name = this.value; clearOnboardingValidation();"
+                  oninput="updateOnboardingField('name', this.value)"
                   placeholder="${isAr ? 'اكتب اسمك هنا...' : 'Enter your name'}"
                   class="neon-input w-full rounded-xl px-4 py-3.5 text-sm font-semibold"
                 />
@@ -1613,7 +1688,7 @@
                   type="text"
                   id="inputParticipantDistrict"
                   value="${escapeHtml(formState.district)}"
-                  oninput="formState.district = this.value; clearOnboardingValidation();"
+                  oninput="updateOnboardingField('district', this.value)"
                   placeholder="${isAr ? 'اختر منطقتك من الأزرار أو اكتبها هنا...' : 'Enter your district or area'}"
                   class="neon-input w-full rounded-xl px-4 py-3.5 text-sm font-semibold mb-2.5"
                 />
@@ -2787,6 +2862,21 @@
       }
     }
 
+    window.updateOnboardingField = function (field, value) {
+      formState[field] = value;
+      window.formState = formState;
+      clearOnboardingValidation();
+    };
+
+    function clearOnboardingValidation() {
+      const errBox = document.getElementById('onboardingErrorBox');
+      if (errBox) errBox.classList.add('hidden');
+      const nameEl = document.getElementById('inputParticipantName');
+      const distEl = document.getElementById('inputParticipantDistrict');
+      if (nameEl) nameEl.classList.remove('border-rose-500');
+      if (distEl) distEl.classList.remove('border-rose-500');
+    }
+
     window.selectDistrictChip = function (district) {
       const nameEl = document.getElementById('inputParticipantName');
       if (nameEl) formState.name = nameEl.value;
@@ -2806,16 +2896,7 @@
       clearOnboardingValidation();
     };
 
-    window.clearOnboardingValidation = function () {
-      const errBox = document.getElementById('onboardingErrorBox');
-      if (errBox) errBox.classList.add('hidden');
-      const nameEl = document.getElementById('inputParticipantName');
-      const distEl = document.getElementById('inputParticipantDistrict');
-      if (nameEl) nameEl.classList.remove('border-rose-500');
-      if (distEl) distEl.classList.remove('border-rose-500');
-    };
-
-    window.startJourneyFromOnboarding = function () {
+    window.startJourneyFromOnboarding = async function () {
       saveCurrentStageInputs();
       const missingName = !formState.name || !formState.name.trim();
       const missingDistrict = !formState.district || !formState.district.trim();
@@ -2845,6 +2926,16 @@
 
       formState.name = formState.name.trim();
       formState.district = formState.district.trim();
+      if (!formState.id) {
+        formState.id = 'user_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+      }
+      formState.status = 'In Progress';
+      formState.lastStageReached = 1;
+      formState.submittedAt = new Date().toISOString();
+
+      // Immediately register this real user in the Database upon starting Stage 1
+      await upsertRealUserRecord(false);
+
       currentStage = 1;
       renderParticipantStage();
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2890,43 +2981,83 @@
       renderParticipantStage();
     };
 
-    window.submitReflectionJourney = async function () {
-      saveCurrentStageInputs();
-      const submissionPayload = {
+    // -------------------------------------------------------------------------
+    // REAL USER DATABASE UPSERT ENGINE (FIRESTORE + LOCALSTORAGE + WEBHOOK)
+    // -------------------------------------------------------------------------
+    async function upsertRealUserRecord(isFinalCompletion = false) {
+      if (!formState.id) {
+        formState.id = 'user_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+      }
+      const userRecord = {
         ...formState,
-        stage1Peak: formState.stage1Peak || 'delegate',
-        stage8Option: formState.stage8Option || 'C',
-        stage6PressureChoice: formState.stage6PressureChoice || 'PAUSE_DELEGATE',
-        submittedAt: new Date().toISOString()
+        status: isFinalCompletion ? 'Completed' : (formState.status || 'In Progress'),
+        submittedAt: new Date().toISOString(),
+        isSeed: false
       };
 
+      // 1. Save to LocalStorage Database immediately
+      const existingIdx = localRealUsers.findIndex((u) => u.id === userRecord.id);
+      if (existingIdx >= 0) {
+        localRealUsers[existingIdx] = userRecord;
+      } else {
+        localRealUsers.unshift(userRecord);
+      }
+      try {
+        localStorage.setItem(LOCAL_DB_KEY, JSON.stringify(localRealUsers));
+      } catch (e) {
+        console.warn('LocalStorage write warning:', e);
+      }
+
+      // 2. Save to Cloud Firestore Database using setDoc with the user's unique ID
       try {
         if (currentUser && db) {
-          const submissionsRef = collection(db, 'artifacts', appId, 'public', 'data', 'lead_forward_submissions');
-          await addDoc(submissionsRef, submissionPayload);
-        } else {
-          liveFirestoreSubmissions.unshift({ id: 'local-' + Date.now(), ...submissionPayload });
+          const userDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'lead_forward_submissions', userRecord.id);
+          await setDoc(userDocRef, userRecord, { merge: true });
         }
       } catch (err) {
-        console.warn("Saved locally as fallback:", err);
-        liveFirestoreSubmissions.unshift({ id: 'local-' + Date.now(), ...submissionPayload });
+        console.warn('Cloud Firestore sync fallback:', err);
+      }
+
+      // 3. Optional External Webhook / Google Sheets POST on final completion
+      if (isFinalCompletion && customWebhookUrl) {
+        try {
+          fetch(customWebhookUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userRecord)
+          });
+        } catch (webhookErr) {
+          console.warn('Webhook POST warning:', webhookErr);
+        }
       }
 
       updateSubmissionCounterBadge();
+    }
+
+    window.submitReflectionJourney = async function () {
+      saveCurrentStageInputs();
+      formState.status = 'Completed';
+      formState.lastStageReached = 10;
+      await upsertRealUserRecord(true);
+
       currentStage = 10;
       renderParticipantStage();
       window.scrollTo({ top: 0, behavior: 'smooth' });
       showToast(
         currentLang === 'ar'
-          ? 'تم حفظ رحلتك القيادية بنجاح وإضافتها لمركز تحليل الفجوات!'
-          : 'Your Leadership Blueprint has been saved!'
+          ? 'تم حفظ بياناتك وإجاباتك في قاعدة البيانات بنجاح!'
+          : 'Your Leadership Blueprint has been saved to the database!'
       );
     };
 
     window.resetForNewParticipant = function () {
-      formState = {
+      formState = window.formState = {
+        id: '',
         name: '',
         district: '',
+        status: 'In Progress',
+        lastStageReached: 0,
         stage1Peak: '',
         stage1Note: '',
         stage2HabitsTags: [],
@@ -2962,66 +3093,64 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // -------------------------------------------------------------------------
-    // 9. PARTICIPANT REVIEW MODAL & DOWNLOADABLE BLUEPRINT
-    // -------------------------------------------------------------------------
     window.openReviewModal = function () {
       const isAr = currentLang === 'ar';
-      const modal = document.getElementById('modalReviewAnswers');
-      const body = document.getElementById('modalReviewBody');
       const peakObj = PEAKS_DATA.find((p) => p.id === formState.stage1Peak);
+      const peakLabel = peakObj ? (isAr ? peakObj.arTitle : peakObj.enTitle) : '-';
 
-      const rows = [
+      const summaryRows = [
         {
-          title: isAr ? '1. جبل القيادة (قمة التحدي)' : '1. The Leadership Mountain',
-          ans: `${peakObj ? (isAr ? peakObj.arTitle : peakObj.enTitle) : '-'} ${formState.stage1Note ? ' — ' + formState.stage1Note : ''}`
+          title: isAr ? '1. جبل القيادة (قمة التحدي الأكبر)' : '1. The Leadership Mountain',
+          val: `${peakLabel} ${formState.stage1Note ? ' — ' + formState.stage1Note : ''}`
         },
         {
           title: isAr ? '2. مرآة الحقيقة (عادات للتغيير)' : '2. The Mirror of Truth',
-          ans: `${(formState.stage2HabitsTags || []).join('، ')} ${formState.stage2Reflection || ''}`
+          val: `${(formState.stage2HabitsTags || []).join('، ')} ${formState.stage2Reflection ? ' — ' + formState.stage2Reflection : ''}`
         },
         {
           title: isAr ? '3. قصة القيادة والورقة الملهمة' : '3. The Leadership Story & Pocket Note',
-          ans: `${formState.stage3ShapedBy || '-'} | "${formState.stage3PocketLesson || '-'}"`
+          val: `${formState.stage3ShapedBy || '-'} — "${formState.stage3PocketLesson || '-'}"`
         },
         {
           title: isAr ? '4. محطات رحلتي القيادية (Timeline)' : '4. My Leadership Timeline',
-          ans: `${formState.stage4FirstRole || '-'} | ${formState.stage4Challenge || '-'} | ${formState.stage4Lesson || '-'}`
+          val: `${formState.stage4FirstRole || '-'} | ${formState.stage4FirstFeeling || '-'} | ${formState.stage4Challenge || '-'} | ${formState.stage4Mistake || '-'} | ${formState.stage4Lesson || '-'}`
         },
         {
           title: isAr ? '5. البصمة القيادية (Fingerprint)' : '5. Leadership Fingerprint',
-          ans: `${formState.stage5CoreValue || '-'} | ${formState.stage5TeamBelief || '-'}`
+          val: `${formState.stage5ImpactMoment || '-'} | Value: ${formState.stage5CoreValue || '-'} | Team: ${formState.stage5TeamBelief || '-'}`
         },
         {
           title: isAr ? '6. أين أقف اليوم (Where I Stand Today)' : '6. Where I Stand Today',
-          ans: `${formState.stage6Strengths || '-'} | ${formState.stage6ThreeWords || '-'} | ${formState.stage6PressureChoice || '-'}`
+          val: `${formState.stage6Strengths || '-'} | 3 Words: ${formState.stage6ThreeWords || '-'} | Under Pressure: ${formState.stage6PressureChoice || '-'}`
         },
         {
-          title: isAr ? '7. القائد الذي أطمح إليه (Leader I Want to Be)' : '7. The Leader I Want to Be',
-          ans: `${formState.stage7CourageNextMonth || '-'} | ${formState.stage7Legacy || '-'}`
+          title: isAr ? '7. القائد الذي أطمح أن أكونه' : '7. The Leader I Want to Be',
+          val: `${formState.stage7CourageNextMonth || '-'} | Legacy: ${formState.stage7Legacy || '-'}`
         },
         {
           title: isAr ? '8. القيم تحت الضغط (Values Under Pressure)' : '8. Values Under Pressure',
-          ans: `Option ${formState.stage8Option || '-'}`
+          val: `Option ${formState.stage8Option || '-'}`
         },
         {
-          title: isAr ? '9 & 10. نافذة جوهاري (Johari Window)' : '9 & 10. Johari Window',
-          ans: `${formState.stage9BlindSpotFeedback || '-'} | ${formState.stage9FacadeHiddenGood || '-'} | ${formState.stage9UndiscoveredPotential || '-'}`
+          title: isAr ? '9. نافذة جوهاري (Johari Window)' : '9. Johari Window',
+          val: `Open: ${formState.stage9OpenArea || '-'} | Feedback: ${formState.stage9BlindSpotFeedback || '-'} | Facade: ${formState.stage9FacadeHiddenGood || '-'} | Potential: ${formState.stage9UndiscoveredPotential || '-'}`
         }
       ];
 
-      body.innerHTML = rows
-        .map(
-          (r) => `
-          <div class="p-3.5 rounded-2xl bg-cosmic-900/90 border border-cyan-500/25">
-            <div class="text-xs font-extrabold text-cyan-400 mb-1">${escapeHtml(r.title)}</div>
-            <div class="text-xs sm:text-sm text-slate-200 leading-relaxed">${escapeHtml(r.ans)}</div>
-          </div>
-        `
-        )
-        .join('');
-
-      modal.classList.remove('hidden');
+      const body = document.getElementById('modalReviewBody');
+      if (body) {
+        body.innerHTML = summaryRows
+          .map(
+            (r) => `
+            <div class="p-3.5 rounded-2xl bg-cosmic-900 border border-slate-800 space-y-1">
+              <div class="text-xs font-extrabold text-cyan-300">${escapeHtml(r.title)}</div>
+              <div class="text-xs sm:text-sm text-slate-200 leading-relaxed">${escapeHtml(r.val || '-')}</div>
+            </div>
+          `
+          )
+          .join('');
+      }
+      document.getElementById('modalReviewAnswers').classList.remove('hidden');
     };
 
     window.closeReviewModal = function () {
@@ -3051,7 +3180,7 @@
 </head>
 <body>
   <div class="card">
-    <div style="font-size:12px; color:#a855f7; font-weight:bold;">RAMEDA · AIM TASKFORCE · DR. BASANT</div>
+    <div style="font-size:12px; color:#a855f7; font-weight:bold;">RAMEDA · AIM TASKFORCE</div>
     <h1>LEAD FORWARD — PERSONAL LEADERSHIP BLUEPRINT</h1>
     <p><strong>${escapeHtml(formState.name)}</strong> | District / Area: <strong>${escapeHtml(formState.district)}</strong></p>
 
@@ -3109,19 +3238,36 @@
     };
 
     // -------------------------------------------------------------------------
-    // 10. FACE 2: DR. BASANT FOCUS GROUP & GAP ANALYTICS ENGINE
+    // 10. FACE 2: FOCUS GROUP & GAP ANALYTICS ENGINE (REAL USERS MERGED)
     // -------------------------------------------------------------------------
     function getAllActiveSubmissions() {
+      // Merge Cloud Firestore + LocalStorage Real Users by unique ID
+      const mergedMap = new Map();
+      localRealUsers.forEach((u) => {
+        if (u && u.id) mergedMap.set(u.id, u);
+      });
+      liveFirestoreSubmissions.forEach((u) => {
+        if (u && u.id) mergedMap.set(u.id, u);
+      });
+      const realUsersList = Array.from(mergedMap.values()).sort(
+        (a, b) => new Date(b.submittedAt || 0) - new Date(a.submittedAt || 0)
+      );
+
       if (includeDemoSeed) {
-        return [...liveFirestoreSubmissions, ...DEMO_SEED_SUBMISSIONS];
+        return [...realUsersList, ...DEMO_SEED_SUBMISSIONS];
       }
-      return [...liveFirestoreSubmissions];
+      return realUsersList;
     }
 
     function updateSubmissionCounterBadge() {
       const countEl = document.getElementById('headerSubmissionCount');
       if (countEl) {
         countEl.textContent = getAllActiveSubmissions().length;
+      }
+      const modalCountEl = document.getElementById('dbModalUserCount');
+      if (modalCountEl) {
+        const realCount = getAllActiveSubmissions().filter((u) => !u.isSeed).length;
+        modalCountEl.textContent = `${realCount} Real Users`;
       }
     }
 
@@ -3131,11 +3277,11 @@
       if (btnText) {
         btnText.textContent = includeDemoSeed
           ? currentLang === 'ar'
-            ? 'المعروض: البيانات الحية + نماذج راميدا'
-            : 'Showing: Live + Sample Rameda Data'
+            ? 'المعروض: المستخدمين الفعليين + بيانات تجريبية'
+            : 'Showing: Real Users + Sample Data'
           : currentLang === 'ar'
-          ? 'المعروض: الإجابات الحية فقط'
-          : 'Showing: Live Submissions Only';
+          ? 'المعروض: المستخدمين الفعليين فقط'
+          : 'Showing: Real Users Only';
       }
       updateSubmissionCounterBadge();
       populateDistrictFilterOptions();
@@ -3407,19 +3553,48 @@
       const listContainer = document.getElementById('managersListContainer');
       if (listContainer) {
         if (filteredManagers.length === 0) {
-          listContainer.innerHTML = `<div class="text-center py-8 text-slate-400 text-xs sm:text-sm">${isAr ? 'لا يوجد مديرون مطابقون لخيارات التصفية الحالية.' : 'No manager profiles match the selected filters.'}</div>`;
+          listContainer.innerHTML = `
+            <div class="text-center py-10 px-4 rounded-2xl bg-cosmic-950/60 border border-slate-800 space-y-3">
+              <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 flex items-center justify-center mx-auto">
+                <i class="fa-solid fa-user-plus text-lg"></i>
+              </div>
+              <div class="text-sm font-extrabold text-white">
+                ${isAr ? 'لا يوجد مستخدمون فعليون مسجلون حتى الآن' : 'No Real User Submissions Yet'}
+              </div>
+              <p class="text-xs text-slate-400 max-w-md mx-auto">
+                ${
+                  isAr
+                    ? 'بمجرد قيام أي مدير بإدخال اسمه ومنطقته في شاشة الترحيب والبدء في المراحل، سيظهر حسابه وإجاباته هنا تلقائياً في الوقت الفعلي.'
+                    : 'As soon as a participant enters their Name and District on the Welcome Screen and starts the journey, their real user profile and answers will appear here automatically.'
+                }
+              </p>
+              <div class="pt-1 flex justify-center gap-2">
+                <button onclick="switchAppFace('participant')" class="btn-neon-primary px-4 py-2 rounded-xl text-xs font-bold text-white">
+                  ${isAr ? 'إضافة مشارك فعلي الآن' : '+ Add Real User via Journey'}
+                </button>
+                <button onclick="toggleDemoDataSeed()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-purple-400/40 text-xs font-bold text-purple-200">
+                  ${isAr ? 'عرض بيانات راميدا التجريبية' : 'Load Sample Demo Data'}
+                </button>
+              </div>
+            </div>
+          `;
         } else {
           listContainer.innerHTML = filteredManagers
             .map((m) => {
               const peakObj = PEAKS_DATA.find((p) => p.id === m.stage1Peak) || PEAKS_DATA[2];
               const hasMicroFlag = m.stage8Option === 'A' || m.stage8Option === 'B';
               const hasOverloadFlag = m.stage6PressureChoice === 'DO_IT_MYSELF';
+              const statusBadge =
+                m.status === 'In Progress'
+                  ? `<span class="px-2 py-0.5 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-[10px] font-bold">In Progress (Stage ${m.lastStageReached || 1}/10)</span>`
+                  : `<span class="px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[10px] font-bold">Completed</span>`;
 
               return `
                 <div class="rounded-2xl p-4 sm:p-5 bg-cosmic-900/90 border border-cyan-500/25 hover:border-cyan-400/60 transition flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                   <div class="space-y-2 flex-1">
                     <div class="flex flex-wrap items-center gap-2">
                       <h4 class="text-sm sm:text-base font-black text-white">${escapeHtml(m.name)}</h4>
+                      ${statusBadge}
                       <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 text-xs font-bold">
                         <i class="fa-solid fa-location-dot me-1"></i>${escapeHtml(m.district)}
                       </span>
@@ -3431,9 +3606,11 @@
                           ? `<span class="px-2.5 py-0.5 rounded-full bg-rose-500/20 border border-rose-400/50 text-rose-300 text-[11px] font-extrabold">
                               <i class="fa-solid fa-triangle-exclamation me-1"></i>${isAr ? 'فجوة ثقة / Micromanagement (المرحلة 8: ' + m.stage8Option + ')' : 'Micromanagement Gap (Stage 8: Opt ' + m.stage8Option + ')'}
                             </span>`
-                          : `<span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-[11px] font-extrabold">
+                          : m.stage8Option === 'C'
+                          ? `<span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-[11px] font-extrabold">
                               <i class="fa-solid fa-shield-check me-1"></i>${isAr ? 'ثقة وتمكين (Opt C)' : 'High-Trust (Opt C)'}
                             </span>`
+                          : ''
                       }
                       ${
                         hasOverloadFlag
@@ -3447,14 +3624,14 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs text-slate-300 pt-1">
                       <div class="p-2 rounded-xl bg-cosmic-950/70 border border-slate-800">
                         <span class="text-[10px] text-slate-400 block font-bold">${isAr ? 'مرآة الحقيقة (عادات للتغيير):' : 'Mirror of Truth (Habits to drop):'}</span>
-                        <span class="text-slate-200 line-clamp-1">${escapeHtml(m.stage2Reflection || (m.stage2HabitsTags || []).join('، '))}</span>
+                        <span class="text-slate-200 line-clamp-1">${escapeHtml(m.stage2Reflection || (m.stage2HabitsTags || []).join('، ') || '-')}</span>
                       </div>
                       <div class="p-2 rounded-xl bg-cosmic-950/70 border border-slate-800">
                         <span class="text-[10px] text-slate-400 block font-bold">${isAr ? 'الزاوية العمياء (Feedback):' : 'Blind Spot Feedback:'}</span>
                         <span class="text-slate-200 line-clamp-1">${escapeHtml(m.stage9BlindSpotFeedback || '-')}</span>
                       </div>
                       <div class="p-2 rounded-xl bg-cosmic-950/70 border border-slate-800">
-                        <span class="text-[10px] text-slate-400 block font-bold">${isAr ? 'القناع (Personal Branding المفقود):' : 'Facade (Unshared Good):'}</span>
+                        <span class="text-[10px] text-slate-400 block font-bold">${isAr ? 'القناع (Personal Branding):' : 'Facade (Unshared Good):'}</span>
                         <span class="text-slate-200 line-clamp-1">${escapeHtml(m.stage9FacadeHiddenGood || '-')}</span>
                       </div>
                     </div>
@@ -3465,7 +3642,7 @@
                     class="btn-neon-primary px-4 py-2.5 rounded-xl text-xs font-extrabold text-white shrink-0 flex items-center justify-center gap-2"
                   >
                     <i class="fa-solid fa-magnifying-glass-chart"></i>
-                    <span>${isAr ? 'عرض الملف والهدف السيكولوجي' : 'Inspect Profile & Coaching Lens'}</span>
+                    <span>${isAr ? 'عرض الملف الكامل' : 'Inspect Full Profile'}</span>
                   </button>
                 </div>
               `;
@@ -3476,7 +3653,7 @@
     };
 
     // -------------------------------------------------------------------------
-    // 11. MANAGER DEEP-DIVE MODAL WITH DR. BASANT'S PSYCHOLOGICAL LENS
+    // 11. PARTICIPANT FULL 10-STAGE PROFILE MODAL (NO BLUEPRINT BOXES)
     // -------------------------------------------------------------------------
     window.openManagerDetailModal = function (submissionId) {
       const isAr = currentLang === 'ar';
@@ -3489,48 +3666,39 @@
       const stagesDetail = [
         {
           stageTitle: isAr ? 'المرحلة 1: جبل القيادة (The Leadership Mountain)' : 'Stage 1: The Leadership Mountain',
-          answer: `${isAr ? peakObj.arTitle : peakObj.enTitle} ${sub.stage1Note ? ' — ' + sub.stage1Note : ''}`,
-          psychNote: isAr ? PSYCHOLOGICAL_OBJECTIVES.stage1.ar : PSYCHOLOGICAL_OBJECTIVES.stage1.en
+          answer: `${isAr ? peakObj.arTitle : peakObj.enTitle} ${sub.stage1Note ? ' — ' + sub.stage1Note : ''}`
         },
         {
           stageTitle: isAr ? 'المرحلة 2: مرآة الحقيقة (The Mirror of Truth)' : 'Stage 2: The Mirror of Truth',
-          answer: `${(sub.stage2HabitsTags || []).join(' | ')} — ${sub.stage2Reflection || '-'}`,
-          psychNote: isAr ? PSYCHOLOGICAL_OBJECTIVES.stage2.ar : PSYCHOLOGICAL_OBJECTIVES.stage2.en
+          answer: `${(sub.stage2HabitsTags || []).join(' | ')} — ${sub.stage2Reflection || '-'}`
         },
         {
           stageTitle: isAr ? 'المرحلة 3: قصة القيادة والورقة الملهمة (The Leadership Story)' : 'Stage 3: The Leadership Story & Pocket Note',
-          answer: `${isAr ? 'القدوة:' : 'Role Model:'} ${sub.stage3ShapedBy || '-'} | ${isAr ? 'الورقة الملهمة:' : 'Pocket Note:'} "${sub.stage3PocketLesson || '-'}"`,
-          psychNote: isAr ? PSYCHOLOGICAL_OBJECTIVES.stage3.ar : PSYCHOLOGICAL_OBJECTIVES.stage3.en
+          answer: `${isAr ? 'القدوة:' : 'Role Model:'} ${sub.stage3ShapedBy || '-'} | ${isAr ? 'الورقة الملهمة:' : 'Pocket Note:'} "${sub.stage3PocketLesson || '-'}"`
         },
         {
           stageTitle: isAr ? 'المرحلة 4: محطات رحلتي القيادية (Leadership Timeline)' : 'Stage 4: My Leadership Timeline',
-          answer: `• ${isAr ? 'أول دور:' : 'First Role:'} ${sub.stage4FirstRole || '-'}\n• ${isAr ? 'أول إحساس:' : 'First Feeling:'} ${sub.stage4FirstFeeling || '-'}\n• ${isAr ? 'أصعب أزمة:' : 'Hardest Crisis:'} ${sub.stage4Challenge || '-'}\n• ${isAr ? 'غلطة قديمة:' : 'Mistake:'} ${sub.stage4Mistake || '-'}\n• ${isAr ? 'درس لا ينسى:' : 'Unforgettable Lesson:'} ${sub.stage4Lesson || '-'}`,
-          psychNote: isAr ? PSYCHOLOGICAL_OBJECTIVES.stage4.ar : PSYCHOLOGICAL_OBJECTIVES.stage4.en
+          answer: `• ${isAr ? 'أول دور:' : 'First Role:'} ${sub.stage4FirstRole || '-'}\n• ${isAr ? 'أول إحساس:' : 'First Feeling:'} ${sub.stage4FirstFeeling || '-'}\n• ${isAr ? 'أصعب أزمة:' : 'Hardest Crisis:'} ${sub.stage4Challenge || '-'}\n• ${isAr ? 'غلطة قديمة:' : 'Mistake:'} ${sub.stage4Mistake || '-'}\n• ${isAr ? 'درس لا ينسى:' : 'Unforgettable Lesson:'} ${sub.stage4Lesson || '-'}`
         },
         {
           stageTitle: isAr ? 'المرحلة 5: البصمة القيادية (Leadership Fingerprint)' : 'Stage 5: Leadership Fingerprint',
-          answer: `• ${isAr ? 'أعظم أثر:' : 'Greatest Impact:'} ${sub.stage5ImpactMoment || '-'}\n• ${isAr ? 'القيمة الجوهرية:' : 'Core Value:'} ${sub.stage5CoreValue || '-'}\n• ${isAr ? 'رؤية التيم للقيادة:' : 'Team Belief:'} ${sub.stage5TeamBelief || '-'}`,
-          psychNote: isAr ? PSYCHOLOGICAL_OBJECTIVES.stage5.ar : PSYCHOLOGICAL_OBJECTIVES.stage5.en
+          answer: `• ${isAr ? 'أعظم أثر:' : 'Greatest Impact:'} ${sub.stage5ImpactMoment || '-'}\n• ${isAr ? 'القيمة الجوهرية:' : 'Core Value:'} ${sub.stage5CoreValue || '-'}\n• ${isAr ? 'رؤية التيم للقيادة:' : 'Team Belief:'} ${sub.stage5TeamBelief || '-'}`
         },
         {
           stageTitle: isAr ? 'المرحلة 6: أين أقف اليوم (Leader I AM Today)' : 'Stage 6: Where I Stand Today',
-          answer: `• ${isAr ? 'نقاط القوة:' : 'Strengths:'} ${sub.stage6Strengths || '-'}\n• ${isAr ? 'لماذا يلجأون إليك:' : 'Relied on for:'} ${(sub.stage6RelyChips || []).join(', ')} (${sub.stage6RelyNote || '-'})\n• ${isAr ? '3 كلمات:' : '3 Words:'} ${sub.stage6ThreeWords || '-'}\n• ${isAr ? 'رد الفعل وقت الضغط:' : 'Under Pressure:'} ${sub.stage6PressureChoice || '-'} (${sub.stage6PressureNote || '-'})`,
-          psychNote: isAr ? PSYCHOLOGICAL_OBJECTIVES.stage6.ar : PSYCHOLOGICAL_OBJECTIVES.stage6.en
+          answer: `• ${isAr ? 'نقاط القوة:' : 'Strengths:'} ${sub.stage6Strengths || '-'}\n• ${isAr ? 'لماذا يلجأون إليك:' : 'Relied on for:'} ${(sub.stage6RelyChips || []).join(', ')} (${sub.stage6RelyNote || '-'})\n• ${isAr ? '3 كلمات:' : '3 Words:'} ${sub.stage6ThreeWords || '-'}\n• ${isAr ? 'رد الفعل وقت الضغط:' : 'Under Pressure:'} ${sub.stage6PressureChoice || '-'} (${sub.stage6PressureNote || '-'})`
         },
         {
           stageTitle: isAr ? 'المرحلة 7: القائد الذي أطمح إليه (Leader I WANT to Be)' : 'Stage 7: The Leader I Want to Be',
-          answer: `• ${isAr ? 'خطوة بشجاعة أكبر الشهر القادم:' : 'With More Courage Next Month:'} ${sub.stage7CourageNextMonth || '-'}\n• ${isAr ? 'برواز النجاح:' : 'Success Picture:'} ${sub.stage7SuccessPicture || '-'}\n• ${isAr ? 'الأثر المستدام (Legacy):' : 'Legacy:'} ${sub.stage7Legacy || '-'}`,
-          psychNote: isAr ? PSYCHOLOGICAL_OBJECTIVES.stage7.ar : PSYCHOLOGICAL_OBJECTIVES.stage7.en
+          answer: `• ${isAr ? 'خطوة بشجاعة أكبر الشهر القادم:' : 'With More Courage Next Month:'} ${sub.stage7CourageNextMonth || '-'}\n• ${isAr ? 'برواز النجاح:' : 'Success Picture:'} ${sub.stage7SuccessPicture || '-'}\n• ${isAr ? 'الأثر المستدام (Legacy):' : 'Legacy:'} ${sub.stage7Legacy || '-'}`
         },
         {
           stageTitle: isAr ? 'المرحلة 8: القيم تحت الضغط (Values Under Pressure)' : 'Stage 8: Values Under Pressure',
-          answer: `Option ${sub.stage8Option || '-'}`,
-          psychNote: isAr ? PSYCHOLOGICAL_OBJECTIVES.stage8.ar : PSYCHOLOGICAL_OBJECTIVES.stage8.en
+          answer: `Option ${sub.stage8Option || '-'}`
         },
         {
           stageTitle: isAr ? 'المرحلة 9 و 10: نافذة جوهاري (Johari Window - Open, Blind Spot, Facade, Potential)' : 'Stages 9 & 10: The Johari Window',
-          answer: `• ${isAr ? 'منطقة الأساس (Open Area):' : 'Open Area:'} ${sub.stage9OpenArea || '-'}\n• ${isAr ? 'الزاوية العمياء (Feedback is Gold):' : 'Blind Spot Feedback:'} ${sub.stage9BlindSpotFeedback || '-'}\n• ${isAr ? 'القناع (تكلم حتى أراك - Facade):' : 'Facade (Unshared Good):'} ${sub.stage9FacadeHiddenGood || '-'}\n• ${isAr ? 'القدرات الكامنة (Undiscovered Potential):' : 'Undiscovered Potential:'} ${sub.stage9UndiscoveredPotential || '-'}`,
-          psychNote: isAr ? PSYCHOLOGICAL_OBJECTIVES.stage9.ar : PSYCHOLOGICAL_OBJECTIVES.stage9.en
+          answer: `• ${isAr ? 'منطقة الأساس (Open Area):' : 'Open Area:'} ${sub.stage9OpenArea || '-'}\n• ${isAr ? 'الزاوية العمياء (Feedback is Gold):' : 'Blind Spot Feedback:'} ${sub.stage9BlindSpotFeedback || '-'}\n• ${isAr ? 'القناع (تكلم حتى أراك - Facade):' : 'Facade (Unshared Good):'} ${sub.stage9FacadeHiddenGood || '-'}\n• ${isAr ? 'القدرات الكامنة (Undiscovered Potential):' : 'Undiscovered Potential:'} ${sub.stage9UndiscoveredPotential || '-'}`
         }
       ];
 
@@ -3538,13 +3706,9 @@
       bodyEl.innerHTML = stagesDetail
         .map(
           (item) => `
-          <div class="rounded-2xl bg-cosmic-900/90 border border-cyan-500/30 p-4 space-y-2.5">
+          <div class="rounded-2xl bg-cosmic-900/90 border border-cyan-500/30 p-4 space-y-2">
             <div class="text-xs sm:text-sm font-extrabold text-cyan-300">${escapeHtml(item.stageTitle)}</div>
             <div class="text-xs sm:text-sm text-white whitespace-pre-line leading-relaxed bg-cosmic-950/80 p-3 rounded-xl border border-slate-800">${escapeHtml(item.answer)}</div>
-            <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-400/35 text-xs text-amber-200 leading-relaxed">
-              <i class="fa-solid fa-user-doctor text-amber-400 me-1"></i>
-              <strong>${escapeHtml(item.psychNote)}</strong>
-            </div>
           </div>
         `
         )
@@ -3555,6 +3719,57 @@
 
     window.closeManagerDetailModal = function () {
       document.getElementById('modalManagerDetail').classList.add('hidden');
+    };
+
+    // -------------------------------------------------------------------------
+    // 11B. DATABASE & GOOGLE SHEETS WEBHOOK CONFIGURATION MODAL HANDLERS
+    // -------------------------------------------------------------------------
+    window.openDatabaseConfigModal = function () {
+      updateSubmissionCounterBadge();
+      const inputEl = document.getElementById('inputWebhookUrl');
+      if (inputEl) inputEl.value = customWebhookUrl;
+      document.getElementById('modalDatabaseConfig').classList.remove('hidden');
+    };
+
+    window.closeDatabaseConfigModal = function () {
+      document.getElementById('modalDatabaseConfig').classList.add('hidden');
+    };
+
+    window.saveWebhookUrlConfig = function () {
+      const inputEl = document.getElementById('inputWebhookUrl');
+      customWebhookUrl = inputEl ? inputEl.value.trim() : '';
+      try {
+        localStorage.setItem('rameda_lead_forward_webhook_url', customWebhookUrl);
+      } catch (e) {}
+      closeDatabaseConfigModal();
+      showToast(
+        customWebhookUrl
+          ? 'External Webhook / Google Sheet URL connected!'
+          : 'External Webhook URL cleared (Using built-in Cloud + Local DB).'
+      );
+    };
+
+    window.copyAppsScriptCode = function () {
+      const codeEl = document.getElementById('appsScriptSnippet');
+      if (!codeEl) return;
+      const temp = document.createElement('textarea');
+      temp.value = codeEl.textContent;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+      showToast('Google Apps Script copied to clipboard!');
+    };
+
+    window.clearLocalRealUsersCache = function () {
+      localRealUsers = [];
+      try {
+        localStorage.removeItem(LOCAL_DB_KEY);
+      } catch (e) {}
+      updateSubmissionCounterBadge();
+      renderTrainerDashboard();
+      closeDatabaseConfigModal();
+      showToast('Local browser cache cleared.');
     };
 
     // -------------------------------------------------------------------------
