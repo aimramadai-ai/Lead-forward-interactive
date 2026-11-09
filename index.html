@@ -20,19 +20,170 @@
         extend: {
           colors: {
             cosmic: {
-              950: '#050714',
-              900: '#090d24',
-              800: '#101738',
-              700: '#192352',
+              950: '#111936',
+              900: '#172247',
+              800: '#202f60',
+              700: '#2b3d7a',
             },
             neon: {
-              cyan: '#00f2fe',
-              blue: '#4facfe',
-              purple: '#a855f7',
-              magenta: '#d946ef',
+              cyan: '#38bdf8',
+              blue: '#60a5fa',
+              purple: '#c084fc',
+              magenta: '#e879f9',
               gold: '#fbbf24',
               amber: '#f59e0b'
             }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-deep: #121b3a;
+      --bg-card: rgba(30, 44, 89, 0.82);
+      --neon-cyan: #38bdf8;
+      --neon-purple: #c084fc;
+      --neon-gold: #fbbf24;
+    }
+
+    body {
+      background-color: #121b3a;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.22) 0%, transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(192, 132, 252, 0.24) 0%, transparent 45%),
+        radial-gradient(circle at 50% 90%, rgba(251, 191, 36, 0.14) 0%, transparent 45%),
+        linear-gradient(180deg, #152046 0%, #1c2b59 50%, #131d3f 100%);
+      background-attachment: fixed;
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    html[dir="ltr"] body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    html[dir="rtl"] body {
+      font-family: 'Cairo', sans-serif;
+    }
+
+    /* Lighter, Clearer Glassmorphic Cards */
+    .neon-card {
+      background: linear-gradient(145deg, rgba(35, 51, 102, 0.90) 0%, rgba(24, 36, 77, 0.94) 100%);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(56, 189, 248, 0.38);
+      box-shadow: 0 12px 36px -8px rgba(7, 12, 30, 0.55), 0 0 28px rgba(56, 189, 248, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+    }
+
+    .neon-card-purple {
+      background: linear-gradient(145deg, rgba(45, 42, 106, 0.90) 0%, rgba(28, 33, 79, 0.95) 100%);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(192, 132, 252, 0.45);
+      box-shadow: 0 12px 36px -8px rgba(7, 12, 30, 0.55), 0 0 28px rgba(192, 132, 252, 0.16), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+    }
+
+    .neon-card-gold {
+      background: linear-gradient(145deg, rgba(46, 54, 104, 0.94) 0%, rgba(28, 38, 82, 0.96) 100%);
+      backdrop-filter: blur(18px);
+      border: 1.5px solid rgba(251, 191, 36, 0.55);
+      box-shadow: 0 14px 40px -8px rgba(7, 12, 30, 0.55), 0 0 32px rgba(251, 191, 36, 0.18), inset 0 1px 2px rgba(255, 255, 255, 0.25);
+    }
+
+    .neon-input {
+      background: rgba(17, 26, 58, 0.85);
+      border: 1px solid rgba(125, 211, 252, 0.42);
+      color: #ffffff;
+      transition: all 0.25s ease;
+    }
+    .neon-input::placeholder {
+      color: #94a3b8;
+    }
+    .neon-input:focus {
+      outline: none;
+      background: rgba(22, 34, 74, 0.95);
+      border-color: #38bdf8;
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.35), inset 0 0 8px rgba(56, 189, 248, 0.12);
+    }
+
+    /* Buttons */
+    .btn-neon-primary {
+      background: linear-gradient(90deg, #0ea5e9 0%, #8b5cf6 55%, #d946ef 100%);
+      box-shadow: 0 4px 22px rgba(139, 92, 246, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+      transition: all 0.25s ease;
+    }
+    .btn-neon-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 28px rgba(56, 189, 248, 0.65), 0 0 15px rgba(217, 70, 239, 0.5);
+    }
+
+    .btn-neon-gold {
+      background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 50%, #fde047 100%);
+      color: #0f172a;
+      font-weight: 800;
+      box-shadow: 0 4px 24px rgba(251, 191, 36, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.7);
+      transition: all 0.25s ease;
+    }
+    .btn-neon-gold:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 32px rgba(251, 191, 36, 0.75);
+    }
+
+    .peak-card {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .peak-card:hover {
+      transform: translateY(-3px);
+    }
+    .peak-card.selected {
+      border-color: #fbbf24 !important;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.24) 0%, rgba(168, 85, 247, 0.28) 100%) !important;
+      box-shadow: 0 0 28px rgba(251, 191, 36, 0.4), inset 0 0 12px rgba(251, 191, 36, 0.22) !important;
+    }
+
+    .option-card.selected {
+      border-color: #38bdf8 !important;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.24) 0%, rgba(168, 85, 247, 0.26) 100%) !important;
+      box-shadow: 0 0 24px rgba(56, 189, 248, 0.4) !important;
+    }
+
+    .text-gradient-cyan {
+      background: linear-gradient(90deg, #38bdf8 0%, #c084fc 60%, #f472b6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .text-gradient-gold {
+      background: linear-gradient(90deg, #fef08a 0%, #fbbf24 55%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.65)); }
+      50% { filter: drop-shadow(0 0 22px rgba(192, 132, 252, 0.9)); }
+    }
+    .animate-glow {
+      animation: pulseGlow 4s infinite ease-in-out;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #121b3a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2b3d7a;
+      border-radius: 9999px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3b529e;
+    }
           }
         }
       }
@@ -197,7 +348,7 @@
 <body class="antialiased selection:bg-cyan-500 selection:text-slate-950">
 
   <!-- TOP PERSISTENT NAVIGATION BAR -->
-  <header class="sticky top-0 z-40 border-b border-cyan-500/20 bg-[#050714]/90 backdrop-blur-xl no-print">
+  <header class="sticky top-0 z-40 border-b border-cyan-400/30 bg-[#152046]/90 backdrop-blur-xl no-print">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2">
       <!-- Brand Logo & Program Title -->
       <div class="flex items-center gap-3">
@@ -277,29 +428,29 @@
 
           <!-- Glowing Emblem & Dedicated Admin Gate Welcome Headline -->
           <div class="flex items-center gap-4 mb-5">
-            <div class="w-16 h-16 rounded-full border border-amber-400/60 bg-cosmic-900/90 flex items-center justify-center shadow-lg shadow-amber-500/20 shrink-0 animate-glow">
-              <i class="fa-solid fa-chart-network text-2xl text-amber-400"></i>
+            <div class="w-16 h-16 rounded-2xl border-2 border-amber-300/70 bg-cosmic-900/90 flex items-center justify-center shadow-lg shadow-amber-500/25 shrink-0 animate-glow">
+              <i class="fa-solid fa-crown text-2xl text-amber-300"></i>
             </div>
             <div>
-              <p class="text-xs font-bold tracking-widest uppercase text-amber-400 mb-0.5" data-i18n="adminGatePreTitle">WELCOME TO THE EXECUTIVE PORTAL</p>
-              <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+              <p class="text-xs font-extrabold tracking-widest uppercase text-amber-300 mb-0.5" data-i18n="adminGatePreTitle">WELCOME TO YOUR EXECUTIVE PORTAL</p>
+              <h2 class="text-2xl sm:text-3xl font-black text-white leading-tight">
                 <span data-i18n="adminGateTitle1">Welcome,</span>
-                <span class="text-gradient-gold block sm:inline" data-i18n="adminGateTitle2"> Dr. Basant / Dr. Basem</span>
+                <span class="text-gradient-gold block sm:inline" data-i18n="adminGateTitle2"> Dr. Basant</span>
               </h2>
             </div>
           </div>
 
-          <!-- Admin Gate Welcome Message Box -->
-          <div class="rounded-2xl bg-cosmic-950/85 border border-amber-500/35 p-4 sm:p-5 mb-5 space-y-2.5">
-            <div class="flex items-center gap-2 text-cyan-300 font-bold text-xs sm:text-sm uppercase tracking-wider">
-              <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i>
-              <span data-i18n="adminGateBoxHeader">Your 3D Leadership & Behavioral Intelligence Gateway</span>
+          <!-- Admin Gate Welcome Message Box (High-Clarity) -->
+          <div class="rounded-2xl bg-cosmic-950/90 border-2 border-cyan-400/40 p-5 mb-5 space-y-3 shadow-inner">
+            <div class="flex items-center gap-2 text-amber-300 font-extrabold text-sm sm:text-base tracking-wide">
+              <i class="fa-solid fa-wand-magic-sparkles text-cyan-300"></i>
+              <span data-i18n="adminGateBoxHeader">Welcome Dr. Basant to Your Advanced Technical Analysis & 3D Leadership Insights</span>
             </div>
-            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed" data-i18n="adminGateBoxBody1">
-              Welcome to the private analytical command center for Rameda's Lead Forward journey. This portal is designed exclusively for you to monitor live participant reflections, uncover hidden leadership gaps, and map out targeted Focus Groups across all districts.
+            <p class="text-xs sm:text-sm text-white/95 font-medium leading-relaxed" data-i18n="adminGateBoxBody1">
+              This executive portal is crafted exclusively for your information. Here you can seamlessly review live participant reflections, pinpoint hidden leadership gaps, and organize targeted Focus Groups by District and Employment Level.
             </p>
-            <p class="text-xs text-amber-200/90 leading-relaxed" data-i18n="adminGateBoxBody2">
-              Please sign in with your authorized AIM Taskforce credentials on the right to access your full 3D technical analysis and real-time participant dataset.
+            <p class="text-xs sm:text-sm text-cyan-200 font-semibold leading-relaxed" data-i18n="adminGateBoxBody2">
+              Please sign in with your AIM Taskforce credentials (AIM / 112233@#) on the right to open your live 3D diagnostic dashboard.
             </p>
           </div>
         </div>
@@ -436,47 +587,50 @@
   <!-- ========================================================================= -->
   <section id="viewTrainerHub" class="hidden py-6 px-3 sm:px-6 max-w-7xl mx-auto space-y-6">
     
-    <!-- Top Executive Welcome Banner -->
-    <div class="neon-card-gold rounded-3xl p-5 sm:p-7 space-y-5 relative overflow-hidden">
-      <div class="absolute -top-20 -right-20 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
+    <!-- Top Executive Welcome Banner for Dr. Basant (High Contrast & Clear) -->
+    <div class="neon-card-gold rounded-3xl p-6 sm:p-8 space-y-5 relative overflow-hidden">
+      <div class="absolute -top-20 -right-20 w-72 h-72 bg-amber-300/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-20 -left-20 w-72 h-72 bg-cyan-400/15 rounded-full blur-3xl pointer-events-none"></div>
       
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
-        <div>
-          <div class="flex flex-wrap items-center gap-2 mb-2.5">
-            <span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs font-extrabold flex items-center gap-1.5">
-              <i class="fa-solid fa-crown"></i>
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+        <div class="space-y-2.5">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="px-3.5 py-1 rounded-full bg-amber-400/25 border border-amber-300/60 text-amber-200 text-xs font-extrabold flex items-center gap-1.5 shadow-sm">
+              <i class="fa-solid fa-crown text-amber-300"></i>
               <span data-i18n="trainerWelcomeBadge">Executive Insight Portal · Exclusively For Your Information</span>
             </span>
-            <span class="px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 text-xs font-bold">
+            <span class="px-3 py-1 rounded-full bg-cyan-400/20 border border-cyan-300/50 text-cyan-200 text-xs font-bold">
               Rameda · AIM Taskforce
             </span>
-            <span id="dbConnectionBadge" class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span id="dbConnectionBadge" class="px-3 py-1 rounded-full bg-emerald-400/20 border border-emerald-300/50 text-emerald-200 text-xs font-bold flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
               <span>Real-Time Database Active</span>
             </span>
           </div>
-          <h2 class="text-2xl sm:text-3xl font-black text-white leading-tight" data-i18n="trainerHubTitle">
-            Welcome Back, Dr. Basant / Dr. Basem — Your Advanced Technical Analysis & 3D Leadership Insights
+
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight" data-i18n="trainerHubTitle">
+            Welcome, Dr. Basant, to Your Advanced Technical Analysis & 3D Leadership Insights
           </h2>
-          <p class="text-xs sm:text-sm text-slate-200 mt-2 max-w-3xl leading-relaxed" data-i18n="trainerHubDesc">
-            We are delighted to welcome you inside your private command hub. Everything below has been synthesized for your information—translating every manager's 10-stage reflection into a 3D diagnostic map of strengths, blind spots, stress behaviors, and regional Focus Group priorities.
+
+          <p class="text-sm sm:text-base text-slate-100 max-w-3xl leading-relaxed font-medium" data-i18n="trainerHubDesc">
+            This dedicated command center is prepared for your information—synthesizing every leader's 10-stage reflection, employment level, location, and behavioral choices into clear Focus Group priorities.
           </p>
         </div>
 
         <!-- Action Buttons -->
         <div class="flex flex-wrap items-center gap-2.5 shrink-0">
-          <button onclick="openDatabaseConfigModal()" class="px-3.5 py-2.5 rounded-xl border border-cyan-400/50 bg-cyan-950/70 hover:bg-cyan-900/80 text-xs font-extrabold text-cyan-200 flex items-center gap-2 transition shadow-sm">
-            <i class="fa-solid fa-plug-circle-bolt text-cyan-400"></i>
+          <button onclick="openDatabaseConfigModal()" class="px-3.5 py-2.5 rounded-xl border border-cyan-300/50 bg-cosmic-900/90 hover:bg-cosmic-800 text-xs font-extrabold text-cyan-200 flex items-center gap-2 transition shadow-sm">
+            <i class="fa-solid fa-plug-circle-bolt text-cyan-300"></i>
             <span data-i18n="btnDbConfig">Database & Link Setup</span>
           </button>
 
-          <button onclick="toggleDemoDataSeed()" id="btnToggleDemoSeed" class="px-3.5 py-2.5 rounded-xl border border-purple-400/40 bg-purple-950/60 hover:bg-purple-900/70 text-xs font-bold text-purple-200 flex items-center gap-2 transition">
-            <i class="fa-solid fa-database text-purple-400"></i>
+          <button onclick="toggleDemoDataSeed()" id="btnToggleDemoSeed" class="px-3.5 py-2.5 rounded-xl border border-purple-300/50 bg-cosmic-900/90 hover:bg-cosmic-800 text-xs font-bold text-purple-200 flex items-center gap-2 transition">
+            <i class="fa-solid fa-database text-purple-300"></i>
             <span id="demoSeedBtnText">Showing: Real Users Only</span>
           </button>
 
-          <button onclick="openClarificationsModal()" class="px-3.5 py-2.5 rounded-xl border border-slate-600 bg-slate-900/80 hover:bg-slate-800 text-xs font-bold text-slate-200 flex items-center gap-2 transition">
-            <i class="fa-solid fa-pen-to-square"></i>
+          <button onclick="openClarificationsModal()" class="px-3.5 py-2.5 rounded-xl border border-slate-400/40 bg-cosmic-900/90 hover:bg-cosmic-800 text-xs font-bold text-white flex items-center gap-2 transition">
+            <i class="fa-solid fa-pen-to-square text-cyan-300"></i>
             <span data-i18n="btnEditClarifications">Welcome Text</span>
           </button>
 
@@ -485,25 +639,25 @@
             <span data-i18n="btnExportCSV">Export Excel / CSV</span>
           </button>
 
-          <button onclick="exportDatasetJSON()" class="px-3.5 py-2.5 rounded-xl border border-emerald-400/40 bg-emerald-950/60 hover:bg-emerald-900/70 text-xs font-bold text-emerald-200 flex items-center gap-2 transition">
-            <i class="fa-solid fa-code text-emerald-400"></i>
+          <button onclick="exportDatasetJSON()" class="px-3.5 py-2.5 rounded-xl border border-emerald-300/50 bg-emerald-900/60 hover:bg-emerald-800/70 text-xs font-bold text-emerald-100 flex items-center gap-2 transition">
+            <i class="fa-solid fa-code text-emerald-300"></i>
             <span data-i18n="btnExportJSON">JSON Dataset</span>
           </button>
         </div>
       </div>
 
       <!-- Second Inner Welcome Briefing Strip -->
-      <div class="rounded-2xl bg-cosmic-950/85 border border-cyan-400/35 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div class="flex items-start sm:items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-cyan-300 shrink-0">
-            <i class="fa-solid fa-compass text-lg"></i>
+      <div class="rounded-2xl bg-cosmic-950/90 border-2 border-cyan-300/40 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 relative z-10 shadow-inner">
+        <div class="flex items-start sm:items-center gap-3.5">
+          <div class="w-11 h-11 rounded-xl bg-amber-400/20 border border-amber-300/60 flex items-center justify-center text-amber-300 shrink-0">
+            <i class="fa-solid fa-compass text-xl"></i>
           </div>
           <div>
-            <div class="text-xs font-extrabold uppercase tracking-wider text-cyan-300" data-i18n="trainerSubWelcomeTitle">
-              Personal Executive Briefing · How to Navigate Your 3D Insights
+            <div class="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-amber-300" data-i18n="trainerSubWelcomeTitle">
+              Welcome Dr. Basant · Your 3D Diagnostic & Focus Group Overview
             </div>
-            <p class="text-xs text-slate-300 mt-0.5 leading-relaxed" data-i18n="trainerSubWelcomeBody">
-              Review the Geographic Clustering cards below to see which Districts need immediate Focus Groups, or click "Inspect Full Profile" on any leader to read their complete 10-stage reflection answers.
+            <p class="text-xs sm:text-sm text-white/95 mt-0.5 leading-relaxed" data-i18n="trainerSubWelcomeBody">
+              Click any Location / District card below to filter participants, or select "Inspect Full Profile" on any manager to view their complete entry information and 10-stage reflection answers.
             </p>
           </div>
         </div>
@@ -775,12 +929,13 @@
     let formState = (window.formState = {
       id: '',
       name: '',
-      position: '',
-      age: '',
       email: '',
       phone: '',
-      experience: '',
+      position: '',
+      jobDescription: '',
+      age: '',
       district: '',
+      experience: '',
       status: 'In Progress',
       lastStageReached: 0,
       stage1Peak: '',
@@ -820,12 +975,12 @@
         navTrainerFace: "Admin Hub",
         cloudLive: "Live Dataset",
         adminGateBadge: "EXECUTIVE ACCESS",
-        adminGatePreTitle: "WELCOME TO THE EXECUTIVE PORTAL",
+        adminGatePreTitle: "WELCOME TO YOUR EXECUTIVE PORTAL",
         adminGateTitle1: "Welcome,",
-        adminGateTitle2: " Dr. Basant / Dr. Basem",
-        adminGateBoxHeader: "Your 3D Leadership & Behavioral Intelligence Gateway",
-        adminGateBoxBody1: "Welcome to the private analytical command center for Rameda's Lead Forward journey. This portal is designed exclusively for you to monitor live participant reflections, uncover hidden leadership gaps, and map out targeted Focus Groups across all districts.",
-        adminGateBoxBody2: "Please sign in with your authorized AIM Taskforce credentials on the right to access your full 3D technical analysis and real-time participant dataset.",
+        adminGateTitle2: " Dr. Basant",
+        adminGateBoxHeader: "Welcome Dr. Basant to Your Advanced Technical Analysis & 3D Leadership Insights",
+        adminGateBoxBody1: "This executive portal is crafted exclusively for your information. Here you can seamlessly review live participant reflections, pinpoint hidden leadership gaps, and organize targeted Focus Groups by District and Employment Level.",
+        adminGateBoxBody2: "Please sign in with your AIM Taskforce credentials (AIM / 112233@#) on the right to open your live 3D diagnostic dashboard.",
         adminStat1: "GAP ANALYSIS",
         adminStat2: "FOCUS GROUPS",
         adminStat3: "FOR YOUR INFO",
@@ -838,17 +993,17 @@
         btnUnlock: "UNLOCK FOCUS GROUP HUB",
         btnBackToParticipant: "Back to Open Participant Entry",
         trainerWelcomeBadge: "Executive Insight Portal · Exclusively For Your Information",
-        trainerHubTitle: "Welcome Back, Dr. Basant / Dr. Basem — Your Advanced Technical Analysis & 3D Leadership Insights",
-        trainerHubDesc: "We are delighted to welcome you inside your private command hub. Everything below has been synthesized for your information—translating every manager's 10-stage reflection into a 3D diagnostic map of strengths, blind spots, stress behaviors, and regional Focus Group priorities.",
-        trainerSubWelcomeTitle: "Personal Executive Briefing · How to Navigate Your 3D Insights",
-        trainerSubWelcomeBody: "Review the Geographic Clustering cards below to see which Districts need immediate Focus Groups, or click 'Inspect Full Profile' on any leader to read their complete 10-stage reflection answers.",
+        trainerHubTitle: "Welcome, Dr. Basant, to Your Advanced Technical Analysis & 3D Leadership Insights",
+        trainerHubDesc: "This dedicated command center is prepared for your information—synthesizing every leader's 10-stage reflection, employment level, location, and behavioral choices into clear Focus Group priorities.",
+        trainerSubWelcomeTitle: "Welcome Dr. Basant · Your 3D Diagnostic & Focus Group Overview",
+        trainerSubWelcomeBody: "Click any Location / District card below to filter participants, or select 'Inspect Full Profile' on any manager to view their complete entry information and 10-stage reflection answers.",
         btnDbConfig: "Database & Link Setup",
         btnEditClarifications: "Welcome Text",
         btnExportCSV: "Export Excel / CSV",
         btnExportJSON: "JSON Dataset",
         fgMatrixPreTitle: "GEOGRAPHIC DIAGNOSTIC CLUSTERING",
-        fgMatrixTitle: "Where & Which Focus Groups Are Needed (By District / Area)",
-        fgMatrixHint: "Click any District card to filter individual managers below",
+        fgMatrixTitle: "Where & Which Focus Groups Are Needed (By Location / District)",
+        fgMatrixHint: "Click any Location / District card to filter individual managers below",
         chartPeaksTitle: "Stage 1: Top Leadership Challenge Peaks Chosen",
         chartPeaksSub: "Measures the #1 self-reported training priority across managers",
         chartPressureTitle: "Stage 8 & 6: Hidden Micromanagement vs. Trust",
@@ -864,12 +1019,12 @@
         navTrainerFace: "لوحة التحكم",
         cloudLive: "تغذية البيانات نشطة",
         adminGateBadge: "دخول تنفيذي خاص",
-        adminGatePreTitle: "مرحباً بك في البوابة التنفيذية",
-        adminGateTitle1: "أهلاً ومرحباً بك،",
-        adminGateTitle2: " د. بسنت / د. باسم",
-        adminGateBoxHeader: "بوابتك الخاصة للتحليل القيادي والسلوكي ثلاثي الأبعاد (3D)",
-        adminGateBoxBody1: "مرحباً بك في مركز القيادة التحليلي الخاص برحلة Lead Forward في راميدا. صُممت هذه الواجهة خصيصاً لمعلوماتك لمتابعة تأملات القادة لحظياً، واكتشاف الفجوات القيادية، وتحديد أولويات الـ Focus Groups لكل منطقة.",
-        adminGateBoxBody2: "يرجى إدخال بيانات الدخول المعتمدة لفريق AIM لفتح لوحة التحليل التقني المتقدم وقاعدة البيانات الكاملة.",
+        adminGatePreTitle: "مرحباً بكِ في البوابة التنفيذية",
+        adminGateTitle1: "أهلاً ومرحباً بكِ،",
+        adminGateTitle2: " د. بسنت",
+        adminGateBoxHeader: "مرحباً د. بسنت في لوحة التحليل التقني المتقدم ورؤى القيادة ثلاثية الأبعاد (3D)",
+        adminGateBoxBody1: "صُممت هذه البوابة التنفيذية خصيصاً لمعلوماتك لمتابعة تأملات القادة لحظياً، واكتشاف الفجوات القيادية، وتحديد أولويات الـ Focus Groups حسب المنطقة والمستوى الوظيفي.",
+        adminGateBoxBody2: "يرجى إدخال بيانات الدخول المعتمدة لفريق AIM (AIM / 112233@#) لفتح لوحة التحليل التقني المتقدم وقاعدة البيانات الكاملة.",
         adminStat1: "تحليل الفجوات",
         adminStat2: "مجموعات التركيز",
         adminStat3: "مخصص لمعلوماتك",
@@ -882,16 +1037,16 @@
         btnUnlock: "فتح لوحة تحليل الفجوات",
         btnBackToParticipant: "العودة لواجهة المشاركين المفتوحة",
         trainerWelcomeBadge: "بوابة الرؤى التنفيذية المتقدمة · مخصصة حصرياً لمعلوماتك",
-        trainerHubTitle: "أهلاً بك مجدداً د. بسنت / د. باسم — لوحة التحليل التقني المتقدم ورؤى القيادة ثلاثية الأبعاد (3D Insights)",
-        trainerHubDesc: "يسعدنا الترحيب بك داخل مركز التحليل الخاص بك. تم تجميع كافة المؤشرات بالأسفل خصيصاً لمعلوماتك — لترجمة إجابات كل مدير في المراحل العشر إلى خريطة تشخيصية ثلاثية الأبعاد لنقاط القوة، الزوايا العمياء، السلوك تحت الضغط، وأولويات الـ Focus Groups.",
-        trainerSubWelcomeTitle: "إحاطة تنفيذية خاصة · دليل استعراض رؤى الـ 3D",
-        trainerSubWelcomeBody: "يمكنك استعراض بطاقات التوزيع الجغرافي بالأسفل لمعرفة المناطق التي تحتاج Focus Groups عاجلة، أو الضغط على 'عرض الملف الكامل' لأي قائد لقراءة إجاباته العشر بالتفصيل.",
+        trainerHubTitle: "أهلاً ومرحباً بكِ د. بسنت — في لوحة التحليل التقني المتقدم ورؤى القيادة ثلاثية الأبعاد (3D Insights)",
+        trainerHubDesc: "تم إعداد مركز القيادة التحليلي هذا خصيصاً لمعلوماتك — لترجمة إجابات كل قائد في المراحل العشر ومستواه الوظيفي ومنطقته إلى خريطة تشخيصية واضحة لأولويات الـ Focus Groups.",
+        trainerSubWelcomeTitle: "مرحباً د. بسنت · نظرة شاملة على التحليل ثلاثي الأبعاد ومجموعات التركيز",
+        trainerSubWelcomeBody: "اضغطي على أي بطاقة منطقة بالأسفل لتصفية المشاركين، أو اضغطي على 'عرض الملف الكامل' لأي مدير لقراءة بياناته وإجاباته العشر بالتفصيل.",
         btnDbConfig: "إعدادات قاعدة البيانات والربط",
         btnEditClarifications: "تعديل نص الترحيب",
         btnExportCSV: "تصدير للإكسيل CSV",
         btnExportJSON: "تحميل Dataset JSON",
         fgMatrixPreTitle: "التوزيع الجغرافي للاحتياجات التدريبية",
-        fgMatrixTitle: "أين نحتاج Focus Groups وفي أي موضوع؟ (حسب الـ District / Area)",
+        fgMatrixTitle: "أين نحتاج Focus Groups وفي أي موضوع؟ (حسب الموقع / المنطقة)",
         fgMatrixHint: "اضغط على أي منطقة لتصفية المديرين التابعين لها بالأسفل",
         chartPeaksTitle: "المرحلة 1: قمم التحديات القيادية الأكثر اختياراً",
         chartPeaksSub: "يقيس الاحتياج التدريبي الأهم الذي ينتظره المديرون مع فرقهم",
@@ -901,7 +1056,7 @@
         tableManagersSub: "اضغط على 'عرض الملف الكامل' لأي مشارك لمراجعة إجاباته العشر بالتفصيل",
         modalInspectorPre: "ملف إجابات المشارك في المراحل العشر",
         btnReviewAnswers: "مراجعة إجاباتي",
-        modalClarifTitle: "تعديل رسائل التوضيح على شاشة الترحيب والدخول"
+        modalClarifTitle: "تعديل رسائل الترحيب والتوضيح"
       }
     };
 
@@ -1085,8 +1240,8 @@
 
     window.jumpToStage = function (stageIdx) {
       saveCurrentStageInputs();
-      if (currentStage === 0 && (!formState.name.trim() || !formState.position.trim() || !String(formState.age).trim() || !formState.email.trim())) {
-        showToast(currentLang === 'ar' ? 'يرجى إدخال الاسم، المسمى الوظيفي، السن، والبريد الإلكتروني أولاً' : 'Please enter your Name, Title, Age, and Email first');
+      if (currentStage === 0 && (!formState.name.trim() || !formState.email.trim() || !formState.phone.trim() || !formState.position.trim())) {
+        showToast(currentLang === 'ar' ? 'يرجى إدخال الاسم، البريد الإلكتروني، رقم الهاتف، والمستوى الوظيفي أولاً' : 'Please enter your Name, Email Address, Phone Number, and Employment Level first');
         return;
       }
       currentStage = stageIdx;
@@ -1133,111 +1288,165 @@
         const clarifBullets = loginClarifications[currentLang] || [];
         container.innerHTML = `
           <div class="neon-card rounded-3xl p-6 sm:p-8 space-y-6 relative overflow-hidden">
-            <div class="flex items-center justify-between border-b border-cyan-500/20 pb-4">
+            <!-- Top Brand Header matching the Welcome Screen reference -->
+            <div class="flex items-center justify-between border-b border-cyan-400/30 pb-4">
               <div>
-                <div class="text-xs font-extrabold tracking-widest text-cyan-400 uppercase">RAMEDA · AIM TASKFORCE</div>
-                <div class="text-xl font-black text-purple-300 tracking-wide">LEAD FORWARD</div>
-                <div class="text-[11px] text-slate-400">${isAr ? 'تجربة استكشاف الهوية القيادية' : 'THE LEADERSHIP DISCOVERY EXPERIENCE'}</div>
+                <div class="text-xs font-extrabold tracking-widest text-cyan-300 uppercase">AIM TASKFORCE · RAMEDA</div>
+                <div class="text-xl sm:text-2xl font-black text-white tracking-wide">LEAD <span class="text-purple-300">FORWARD</span></div>
+                <div class="text-[11px] font-semibold text-slate-200 tracking-wider uppercase">${isAr ? 'تجربة استكشاف الهوية القيادية' : 'THE LEADERSHIP DISCOVERY EXPERIENCE'}</div>
               </div>
               <div class="text-end">
-                <div class="text-[11px] font-bold text-slate-400">${isAr ? '10 مراحل · رحلة واحدة' : '10 STAGES · ONE JOURNEY'}</div>
+                <div class="text-xs font-extrabold text-cyan-200 tracking-wider uppercase">${isAr ? '10 مراحل · رحلة واحدة' : '10 STAGES · ONE JOURNEY'}</div>
               </div>
             </div>
 
-            <div class="text-center space-y-3 py-2">
-              <div class="w-16 h-16 rounded-full border border-cyan-400/50 bg-cosmic-900/90 flex items-center justify-center mx-auto shadow-lg shadow-cyan-500/20 animate-glow">
-                <svg class="w-8 h-8 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <!-- Glowing Emblem & Hero Welcome Message -->
+            <div class="text-center space-y-3.5 py-3">
+              <div class="w-20 h-20 rounded-full border-2 border-cyan-300/60 bg-cosmic-900/90 flex items-center justify-center mx-auto shadow-lg shadow-cyan-400/25 animate-glow">
+                <svg class="w-9 h-9 text-cyan-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                   <path d="M12 3L14.5 9.5L21 12L14.5 14.5L12 21L9.5 14.5L3 12L9.5 9.5L12 3Z"/>
                 </svg>
               </div>
-              <p class="text-xs font-bold tracking-widest uppercase text-cyan-400">${isAr ? 'رحلتك تبدأ من هنا' : 'YOUR JOURNEY STARTS HERE'}</p>
-              <h2 class="text-2xl sm:text-4xl font-black text-white leading-tight">
+              <p class="text-xs sm:text-sm font-extrabold tracking-[0.2em] uppercase text-cyan-300">${isAr ? 'رحلتك تبدأ من هنا' : 'YOUR JOURNEY STARTS HERE'}</p>
+              <h2 class="text-3xl sm:text-5xl font-black text-white leading-tight">
                 ${isAr ? 'اكتشف ' : 'Discover the '}
-                <span class="text-gradient-cyan">${isAr ? 'القائد بداخلك.' : 'Leader Within.'}</span>
+                <span class="text-gradient-cyan block sm:inline">${isAr ? 'القائد بداخلك.' : 'Leader Within.'}</span>
               </h2>
-              <p class="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto leading-relaxed">
+              <p class="text-sm sm:text-base text-slate-100 max-w-lg mx-auto leading-relaxed font-medium">
                 ${isAr ? 'ده مش امتحان خالص، دي مساحتك الخاصة للتأمل واستكشاف هويتك القيادية، عشان نترجم أول 15 دقيقة من المحاضرة لواقع عملي ونطلع بالورقة الملهمة بتاعتك وبوصلتك القيادية.' : "This is not an exam. It's your personal space to reflect, explore your leadership identity, and shape the impact you want to leave."}
               </p>
             </div>
 
+            <!-- 3 Metric Cards: 10 STAGES | ∞ POSSIBILITIES | 1 YOU -->
             <div class="grid grid-cols-3 gap-3">
-              <div class="rounded-2xl bg-cosmic-900/90 border border-cyan-500/25 p-3.5 text-center">
-                <div class="text-xl sm:text-2xl font-black text-cyan-400">10</div>
-                <div class="text-[10px] sm:text-xs font-bold tracking-wider uppercase text-slate-400">${isAr ? 'مراحل' : 'STAGES'}</div>
+              <div class="rounded-2xl bg-cosmic-900/95 border border-cyan-400/40 p-4 text-center shadow-sm">
+                <div class="text-2xl sm:text-3xl font-black text-cyan-300">10</div>
+                <div class="text-[11px] sm:text-xs font-extrabold tracking-wider uppercase text-slate-200 mt-0.5">${isAr ? 'مراحل' : 'STAGES'}</div>
               </div>
-              <div class="rounded-2xl bg-cosmic-900/90 border border-purple-500/25 p-3.5 text-center">
-                <div class="text-xl sm:text-2xl font-black text-purple-400">∞</div>
-                <div class="text-[10px] sm:text-xs font-bold tracking-wider uppercase text-slate-400">${isAr ? 'إمكانيات' : 'POSSIBILITIES'}</div>
+              <div class="rounded-2xl bg-cosmic-900/95 border border-purple-400/40 p-4 text-center shadow-sm">
+                <div class="text-2xl sm:text-3xl font-black text-purple-300">∞</div>
+                <div class="text-[11px] sm:text-xs font-extrabold tracking-wider uppercase text-slate-200 mt-0.5">${isAr ? 'إمكانيات' : 'POSSIBILITIES'}</div>
               </div>
-              <div class="rounded-2xl bg-cosmic-900/90 border border-amber-500/25 p-3.5 text-center">
-                <div class="text-xl sm:text-2xl font-black text-amber-400">1</div>
-                <div class="text-[10px] sm:text-xs font-bold tracking-wider uppercase text-slate-400">${isAr ? 'أنت' : 'YOU'}</div>
+              <div class="rounded-2xl bg-cosmic-900/95 border border-amber-400/40 p-4 text-center shadow-sm">
+                <div class="text-2xl sm:text-3xl font-black text-amber-300">1</div>
+                <div class="text-[11px] sm:text-xs font-extrabold tracking-wider uppercase text-slate-200 mt-0.5">${isAr ? 'أنت' : 'YOU'}</div>
               </div>
             </div>
 
-            <div class="rounded-2xl bg-cosmic-950/80 border border-purple-500/30 p-4 space-y-2">
-              <div class="flex items-center gap-2 text-amber-300 font-bold text-xs uppercase tracking-wider">
-                <i class="fa-solid fa-lightbulb text-amber-400"></i>
+            <!-- Welcome & Reflection Guidelines Box -->
+            <div class="rounded-2xl bg-cosmic-950/90 border border-purple-400/40 p-4 sm:p-5 space-y-2">
+              <div class="flex items-center gap-2 text-amber-300 font-extrabold text-xs sm:text-sm uppercase tracking-wider">
+                <i class="fa-solid fa-lightbulb text-amber-300"></i>
                 <span>${isAr ? 'رسالة ترحيب وتوضيح هام' : 'Welcome & Reflection Guidelines'}</span>
               </div>
-              <ul class="space-y-1.5 text-xs text-slate-300 leading-relaxed">
-                ${clarifBullets.map((line) => `<li class="flex items-start gap-2"><span class="text-cyan-400 font-bold">•</span><span>${escapeHtml(line)}</span></li>`).join('')}
+              <ul class="space-y-1.5 text-xs sm:text-sm text-slate-100 leading-relaxed">
+                ${clarifBullets.map((line) => `<li class="flex items-start gap-2"><span class="text-cyan-300 font-bold">•</span><span>${escapeHtml(line)}</span></li>`).join('')}
               </ul>
             </div>
 
-            <div id="onboardingFormCard" class="rounded-2xl bg-cosmic-900/90 border border-cyan-400/35 p-5 space-y-4">
-              <div class="flex flex-wrap items-center justify-between gap-2">
-                <div class="text-xs font-extrabold uppercase tracking-wider text-cyan-400">${isAr ? 'قبل أن نبدأ — البيانات الأساسية' : 'BEFORE WE BEGIN'}</div>
-                <span class="text-[11px] text-slate-400">${isAr ? 'الاسم والمسمى والسن والإيميل إلزامي (*)' : 'Name, Title, Age & Email required (*)'}</span>
+            <!-- BEFORE WE BEGIN — Entry Information Form -->
+            <div id="onboardingFormCard" class="rounded-2xl bg-cosmic-900/95 border-2 border-cyan-400/45 p-5 sm:p-6 space-y-4 shadow-lg">
+              <div class="flex flex-wrap items-center justify-between gap-2 border-b border-cyan-400/25 pb-3">
+                <div class="text-xs sm:text-sm font-black uppercase tracking-wider text-cyan-300">${isAr ? 'قبل أن نبدأ — البيانات الأساسية' : 'BEFORE WE BEGIN'}</div>
+                <span class="px-2.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-300/40 text-[11px] font-bold text-cyan-200">
+                  ${isAr ? 'الاسم، الإيميل، الهاتف، والمستوى الوظيفي إلزامي (*)' : 'Only Name, Email, Phone & Employment Level are mandatory (*)'}
+                </span>
               </div>
 
-              <div>
-                <label class="block text-xs sm:text-sm font-bold text-slate-200 mb-1.5">${isAr ? '1. الاسم بالكامل' : '1. Your name'} <span class="text-rose-400">*</span></label>
-                <input type="text" id="inputParticipantName" value="${escapeHtml(formState.name)}" oninput="updateOnboardingField('name', this.value)" placeholder="${isAr ? 'اكتب اسمك هنا...' : 'Enter your name'}" class="neon-input w-full rounded-xl px-4 py-3 text-sm font-semibold" />
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <!-- 4 MANDATORY FIELDS: Name, Email Address, Phone Number, Employment Level -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- 1. Name (Mandatory) -->
                 <div>
-                  <label class="block text-xs sm:text-sm font-bold text-slate-200 mb-1.5">${isAr ? '2. المسمى الوظيفي' : '2. Title / Position'} <span class="text-rose-400">*</span></label>
-                  <input type="text" id="inputParticipantPosition" value="${escapeHtml(formState.position)}" oninput="updateOnboardingField('position', this.value)" placeholder="e.g. District Manager" class="neon-input w-full rounded-xl px-4 py-3 text-sm font-semibold" />
+                  <label class="block text-xs sm:text-sm font-bold text-white mb-1.5">
+                    ${isAr ? '1. الاسم بالكامل' : '1. Your Name'} <span class="text-rose-400 font-black">*</span>
+                  </label>
+                  <input type="text" id="inputParticipantName" value="${escapeHtml(formState.name)}" oninput="updateOnboardingField('name', this.value)" placeholder="${isAr ? 'اكتب اسمك بالكامل...' : 'Enter your name'}" class="neon-input w-full rounded-xl px-4 py-3 text-sm font-semibold" />
                 </div>
-                <div>
-                  <label class="block text-xs sm:text-sm font-bold text-slate-200 mb-1.5">${isAr ? '3. السن' : '3. Age'} <span class="text-rose-400">*</span></label>
-                  <input type="number" min="18" max="80" id="inputParticipantAge" value="${escapeHtml(formState.age)}" oninput="updateOnboardingField('age', this.value)" placeholder="e.g. 34" class="neon-input w-full rounded-xl px-4 py-3 text-sm font-semibold" />
-                </div>
-              </div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <!-- 2. Email Address (Mandatory) -->
                 <div>
-                  <label class="block text-xs sm:text-sm font-bold text-slate-200 mb-1.5">${isAr ? '4. البريد الإلكتروني' : '4. Email Address'} <span class="text-rose-400">*</span></label>
+                  <label class="block text-xs sm:text-sm font-bold text-white mb-1.5">
+                    ${isAr ? '2. البريد الإلكتروني' : '2. Email Address'} <span class="text-rose-400 font-black">*</span>
+                  </label>
                   <input type="email" id="inputParticipantEmail" value="${escapeHtml(formState.email)}" oninput="updateOnboardingField('email', this.value)" placeholder="name@rameda.com" class="neon-input w-full rounded-xl px-4 py-3 text-sm font-semibold" />
                 </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- 3. Phone Number for Contact (Mandatory) -->
                 <div>
-                  <label class="block text-xs sm:text-sm font-bold text-slate-200 mb-1.5">${isAr ? '5. رقم الهاتف (اختياري)' : '5. Phone Number'} <span class="text-[11px] font-normal text-slate-400">(Optional)</span></label>
+                  <label class="block text-xs sm:text-sm font-bold text-white mb-1.5">
+                    ${isAr ? '3. رقم الهاتف للتواصل' : '3. Phone Number'} <span class="text-rose-400 font-black">*</span>
+                  </label>
                   <input type="tel" id="inputParticipantPhone" value="${escapeHtml(formState.phone)}" oninput="updateOnboardingField('phone', this.value)" placeholder="010xxxxxxxx" class="neon-input w-full rounded-xl px-4 py-3 text-sm font-semibold" />
                 </div>
-              </div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <!-- 4. Employment Level / Position (Mandatory) -->
                 <div>
-                  <label class="block text-xs sm:text-sm font-bold text-slate-200 mb-1.5">${isAr ? '6. سنوات الخبرة / اللاين (اختياري)' : '6. Years in Leadership'} <span class="text-[11px] font-normal text-slate-400">(Optional)</span></label>
-                  <input type="text" id="inputParticipantExperience" value="${escapeHtml(formState.experience)}" oninput="updateOnboardingField('experience', this.value)" placeholder="4 Years" class="neon-input w-full rounded-xl px-4 py-3 text-sm font-semibold" />
-                </div>
-                <div>
-                  <label class="block text-xs sm:text-sm font-bold text-slate-200 mb-1.5">${isAr ? '7. المنطقة / القطاع (اختياري)' : '7. District / Area'} <span class="text-[11px] font-normal text-slate-400">(Optional)</span></label>
-                  <input type="text" id="inputParticipantDistrict" value="${escapeHtml(formState.district)}" oninput="updateOnboardingField('district', this.value)" placeholder="Cairo East" class="neon-input w-full rounded-xl px-4 py-3 text-sm font-semibold" />
+                  <label class="block text-xs sm:text-sm font-bold text-white mb-1.5">
+                    ${isAr ? '4. المستوى الوظيفي (Employment Level)' : '4. Employment Level'} <span class="text-rose-400 font-black">*</span>
+                  </label>
+                  <input type="text" id="inputParticipantPosition" value="${escapeHtml(formState.position)}" oninput="updateOnboardingField('position', this.value)" placeholder="${isAr ? 'مثال: District Manager / First-Line Manager' : 'e.g. District Manager / Sales Manager / Supervisor'}" class="neon-input w-full rounded-xl px-4 py-3 text-sm font-semibold" />
                 </div>
               </div>
 
-              <div>
-                <div class="text-[11px] text-slate-400 mb-1.5">${isAr ? 'أو اختر منطقتك مباشرة (اختياري):' : 'Quick-select District / Area (Optional):'}</div>
-                <div class="flex flex-wrap gap-1.5" id="districtChipsWrapper">
-                  ${DISTRICTS_LIST.map((d) => `<button type="button" onclick="selectDistrictChip('${d}')" data-district="${d}" class="district-chip px-2.5 py-1 rounded-lg text-[11px] font-bold border transition ${formState.district === d ? 'bg-cyan-500/30 border-cyan-400 text-white shadow-sm' : 'bg-cosmic-950/80 border-slate-700 text-slate-300 hover:border-cyan-400/50'}">${d}</button>`).join('')}
+              <!-- OPTIONAL FIELDS DIVIDER -->
+              <div class="pt-2 border-t border-slate-600/40">
+                <div class="text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-3">
+                  ${isAr ? 'بيانات إضافية (اختيارية - غير إلزامية)' : 'Additional Profile Details (Optional)'}
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                  <!-- 5. Job Description (Optional) -->
+                  <div>
+                    <label class="block text-xs sm:text-sm font-bold text-slate-100 mb-1.5">
+                      ${isAr ? '5. الوصف الوظيفي (Job Description)' : '5. Job Description'} <span class="text-[11px] font-normal text-slate-300">(${isAr ? 'اختياري' : 'Optional'})</span>
+                    </label>
+                    <input type="text" id="inputParticipantJobDescription" value="${escapeHtml(formState.jobDescription)}" oninput="updateOnboardingField('jobDescription', this.value)" placeholder="${isAr ? 'نبذة سريعة عن دورك ومهامك...' : 'Brief description of your role & responsibilities'}" class="neon-input w-full rounded-xl px-4 py-3 text-sm font-semibold" />
+                  </div>
+
+                  <!-- 6. Age (Optional) -->
+                  <div>
+                    <label class="block text-xs sm:text-sm font-bold text-slate-100 mb-1.5">
+                      ${isAr ? '6. السن (Age)' : '6. Age'} <span class="text-[11px] font-normal text-slate-300">(${isAr ? 'اختياري' : 'Optional'})</span>
+                    </label>
+                    <input type="number" min="18" max="80" id="inputParticipantAge" value="${escapeHtml(formState.age)}" oninput="updateOnboardingField('age', this.value)" placeholder="e.g. 34" class="neon-input w-full rounded-xl px-4 py-3 text-sm font-semibold" />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <!-- 7. Location / District / Area (Optional) -->
+                  <div>
+                    <label class="block text-xs sm:text-sm font-bold text-slate-100 mb-1.5">
+                      ${isAr ? '7. الموقع / المنطقة (Location / District)' : '7. Location / District / Area'} <span class="text-[11px] font-normal text-slate-300">(${isAr ? 'اختياري' : 'Optional'})</span>
+                    </label>
+                    <input type="text" id="inputParticipantDistrict" value="${escapeHtml(formState.district)}" oninput="updateOnboardingField('district', this.value)" placeholder="${isAr ? 'أدخل موقعك أو منطقتك...' : 'Enter your location, district or area'}" class="neon-input w-full rounded-xl px-4 py-3 text-sm font-semibold" />
+                  </div>
+
+                  <!-- 8. Years in Leadership / Line (Optional) -->
+                  <div>
+                    <label class="block text-xs sm:text-sm font-bold text-slate-100 mb-1.5">
+                      ${isAr ? '8. سنوات الخبرة / اللاين' : '8. Years in Leadership / Line'} <span class="text-[11px] font-normal text-slate-300">(${isAr ? 'اختياري' : 'Optional'})</span>
+                    </label>
+                    <input type="text" id="inputParticipantExperience" value="${escapeHtml(formState.experience)}" oninput="updateOnboardingField('experience', this.value)" placeholder="e.g. 4 Years" class="neon-input w-full rounded-xl px-4 py-3 text-sm font-semibold" />
+                  </div>
+                </div>
+
+                <!-- Quick Location / District Chips -->
+                <div class="mt-3">
+                  <div class="text-[11px] text-slate-200 mb-1.5">${isAr ? 'أو اختر الموقع / المنطقة سريعا (اختياري):' : 'Quick-select Location / District (Optional):'}</div>
+                  <div class="flex flex-wrap gap-1.5" id="districtChipsWrapper">
+                    ${DISTRICTS_LIST.map((d) => `<button type="button" onclick="selectDistrictChip('${d}')" data-district="${d}" class="district-chip px-2.5 py-1 rounded-lg text-[11px] font-bold border transition ${formState.district === d ? 'bg-cyan-400/35 border-cyan-300 text-white shadow-sm' : 'bg-cosmic-950/90 border-slate-500/50 text-slate-200 hover:border-cyan-300'}">${d}</button>`).join('')}
+                  </div>
                 </div>
               </div>
 
-              <div id="onboardingErrorBox" class="hidden rounded-xl bg-rose-950/90 border border-rose-500/60 p-3 text-xs font-bold text-rose-200 flex items-center gap-2">
-                <i class="fa-solid fa-triangle-exclamation text-rose-400 shrink-0"></i>
+              <p class="text-[11px] text-slate-200 pt-1">
+                ${isAr ? 'خد وقتك. إجاباتك للتأمل الشخصي. تجنب كتابة أي معلومات سرية تخص الشركة أو الموظفين.' : 'Take your time. Your answers are for reflection. Avoid including confidential company or employee information.'}
+              </p>
+
+              <div id="onboardingErrorBox" class="hidden rounded-xl bg-rose-900/90 border border-rose-400 p-3 text-xs font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-triangle-exclamation text-amber-300 shrink-0"></i>
                 <span id="onboardingErrorText"></span>
               </div>
             </div>
@@ -1603,12 +1812,13 @@
       const val = (id) => { const el = document.getElementById(id); return el ? el.value : null; };
       if (currentStage === 0) {
         if (val('inputParticipantName') !== null) formState.name = val('inputParticipantName');
-        if (val('inputParticipantPosition') !== null) formState.position = val('inputParticipantPosition');
-        if (val('inputParticipantAge') !== null) formState.age = val('inputParticipantAge');
         if (val('inputParticipantEmail') !== null) formState.email = val('inputParticipantEmail');
         if (val('inputParticipantPhone') !== null) formState.phone = val('inputParticipantPhone');
-        if (val('inputParticipantExperience') !== null) formState.experience = val('inputParticipantExperience');
+        if (val('inputParticipantPosition') !== null) formState.position = val('inputParticipantPosition');
+        if (val('inputParticipantJobDescription') !== null) formState.jobDescription = val('inputParticipantJobDescription');
+        if (val('inputParticipantAge') !== null) formState.age = val('inputParticipantAge');
         if (val('inputParticipantDistrict') !== null) formState.district = val('inputParticipantDistrict');
+        if (val('inputParticipantExperience') !== null) formState.experience = val('inputParticipantExperience');
       } else if (currentStage === 1) {
         if (val('inputStage1Note') !== null) formState.stage1Note = val('inputStage1Note');
       } else if (currentStage === 2) {
@@ -1668,9 +1878,9 @@
       saveCurrentStageInputs();
       const requiredChecks = [
         { key: 'name', id: 'inputParticipantName' },
-        { key: 'position', id: 'inputParticipantPosition' },
-        { key: 'age', id: 'inputParticipantAge' },
-        { key: 'email', id: 'inputParticipantEmail' }
+        { key: 'email', id: 'inputParticipantEmail' },
+        { key: 'phone', id: 'inputParticipantPhone' },
+        { key: 'position', id: 'inputParticipantPosition' }
       ];
 
       const missingField = requiredChecks.find((f) => !formState[f.key] || !String(formState[f.key]).trim());
@@ -1680,17 +1890,20 @@
         const targetEl = document.getElementById(missingField.id);
         if (errBox && errText) {
           errBox.classList.remove('hidden');
-          errText.textContent = currentLang === 'ar' ? 'يرجى استكمال الحقول الإلزامية الأربعة (الاسم، المسمى، السن، والبريد الإلكتروني).' : 'Please complete the 4 mandatory fields (Name, Title, Age, and Email).';
+          errText.textContent = currentLang === 'ar'
+            ? 'يرجى استكمال الحقول الإلزامية الأربعة فقط: الاسم، البريد الإلكتروني، رقم الهاتف، والمستوى الوظيفي.'
+            : 'Please complete the 4 mandatory fields: Name, Email Address, Phone Number, and Employment Level.';
         }
         if (targetEl) targetEl.focus();
         return;
       }
 
       formState.name = String(formState.name).trim();
-      formState.position = String(formState.position).trim();
-      formState.age = String(formState.age).trim();
       formState.email = String(formState.email).trim();
-      formState.phone = String(formState.phone || '').trim();
+      formState.phone = String(formState.phone).trim();
+      formState.position = String(formState.position).trim();
+      formState.jobDescription = String(formState.jobDescription || '').trim();
+      formState.age = String(formState.age || '').trim();
       formState.experience = String(formState.experience || '').trim();
       formState.district = String(formState.district || '').trim() || 'General / Unspecified';
 
@@ -1788,7 +2001,7 @@
 
     window.resetForNewParticipant = function () {
       formState = window.formState = {
-        id: '', name: '', position: '', age: '', email: '', phone: '', experience: '', district: '',
+        id: '', name: '', email: '', phone: '', position: '', jobDescription: '', age: '', district: '', experience: '',
         status: 'In Progress', lastStageReached: 0, stage1Peak: '', stage1Note: '', stage2HabitsTags: [],
         stage2Reflection: '', stage3ShapedBy: '', stage3PocketLesson: '', stage4FirstRole: '', stage4FirstFeeling: '',
         stage4Challenge: '', stage4Mistake: '', stage4Lesson: '', stage5ImpactMoment: '', stage5CoreValue: '',
@@ -1997,20 +2210,23 @@
       const listContainer = document.getElementById('managersListContainer');
       if (listContainer) {
         listContainer.innerHTML = filteredManagers.length === 0 ? `
-          <div class="text-center py-10 px-4 rounded-2xl bg-cosmic-950/60 border border-slate-800 space-y-3">
+          <div class="text-center py-10 px-4 rounded-2xl bg-cosmic-950/60 border border-slate-600/40 space-y-3">
             <div class="text-sm font-extrabold text-white">No Real User Submissions Yet</div>
-            <p class="text-xs text-slate-400">As soon as participants complete the onboarding form and start the journey, their profiles will appear here live.</p>
+            <p class="text-xs text-slate-200">As soon as participants complete the onboarding form and start the journey, their profiles will appear here live.</p>
           </div>
         ` : filteredManagers.map(m => `
-          <div class="rounded-2xl p-4 sm:p-5 bg-cosmic-900/90 border border-cyan-500/25 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div class="rounded-2xl p-4 sm:p-5 bg-cosmic-900/95 border border-cyan-400/35 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div class="space-y-1.5 flex-1">
               <div class="flex flex-wrap items-center gap-2">
                 <h4 class="text-sm sm:text-base font-black text-white">${escapeHtml(m.name)}</h4>
-                <span class="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 text-[10px] font-bold">${escapeHtml(m.district)}</span>
-                <span class="px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-200 text-xs">${escapeHtml(m.position || '-')}</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-cyan-400/25 border border-cyan-300/40 text-cyan-200 text-[11px] font-bold">${escapeHtml(m.district || 'General')}</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-purple-400/25 border border-purple-300/40 text-purple-100 text-xs font-bold">${escapeHtml(m.position || '-')}</span>
               </div>
-              <div class="flex flex-wrap gap-3 text-[11px] text-slate-300">
-                <span>Age: ${escapeHtml(m.age || '-')}</span><span>Email: ${escapeHtml(m.email || '-')}</span><span>Phone: ${escapeHtml(m.phone || '-')}</span>
+              <div class="flex flex-wrap gap-3 text-xs text-slate-200">
+                <span><strong class="text-cyan-300">Email:</strong> ${escapeHtml(m.email || '-')}</span>
+                <span><strong class="text-cyan-300">Phone:</strong> ${escapeHtml(m.phone || '-')}</span>
+                <span><strong class="text-cyan-300">Job Desc:</strong> ${escapeHtml(m.jobDescription || '-')}</span>
+                <span><strong class="text-cyan-300">Age:</strong> ${escapeHtml(m.age || '-')}</span>
               </div>
             </div>
             <button onclick="openManagerDetailModal('${escapeHtml(m.id)}')" class="btn-neon-primary px-4 py-2.5 rounded-xl text-xs font-extrabold text-white shrink-0">
@@ -2024,16 +2240,35 @@
     window.openManagerDetailModal = function (submissionId) {
       const sub = getAllActiveSubmissions().find(s => s.id === submissionId);
       if (!sub) return;
-      document.getElementById('modalManagerName').textContent = `${sub.name} — ${sub.district}`;
+      document.getElementById('modalManagerName').textContent = `${sub.name} — ${sub.district || 'General'}`;
       const bodyEl = document.getElementById('modalManagerBody');
       bodyEl.innerHTML = `
-        <div class="rounded-2xl bg-cosmic-900/90 border border-cyan-500/30 p-4 space-y-2">
-          <div class="text-xs font-extrabold text-cyan-300">Contact & Entry Details</div>
-          <div class="text-xs text-white whitespace-pre-line leading-relaxed">Name: ${sub.name}\nPosition: ${sub.position}\nAge: ${sub.age}\nEmail: ${sub.email}\nPhone: ${sub.phone}\nDistrict: ${sub.district}</div>
+        <div class="rounded-2xl bg-cosmic-900/95 border border-cyan-400/40 p-4 space-y-2">
+          <div class="text-xs font-extrabold text-cyan-300 uppercase tracking-wider">Participant Entry Information</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-white leading-relaxed">
+            <div><strong class="text-cyan-200">Name:</strong> ${escapeHtml(sub.name || '-')}</div>
+            <div><strong class="text-cyan-200">Email:</strong> ${escapeHtml(sub.email || '-')}</div>
+            <div><strong class="text-cyan-200">Phone:</strong> ${escapeHtml(sub.phone || '-')}</div>
+            <div><strong class="text-cyan-200">Employment Level:</strong> ${escapeHtml(sub.position || '-')}</div>
+            <div><strong class="text-cyan-200">Job Description:</strong> ${escapeHtml(sub.jobDescription || '-')}</div>
+            <div><strong class="text-cyan-200">Location / District:</strong> ${escapeHtml(sub.district || '-')}</div>
+            <div><strong class="text-cyan-200">Age:</strong> ${escapeHtml(sub.age || '-')}</div>
+            <div><strong class="text-cyan-200">Experience:</strong> ${escapeHtml(sub.experience || '-')}</div>
+          </div>
         </div>
-        <div class="rounded-2xl bg-cosmic-900/90 border border-cyan-500/30 p-4 space-y-2">
-          <div class="text-xs font-extrabold text-cyan-300">Stage Reflections</div>
-          <div class="text-xs text-white whitespace-pre-line leading-relaxed">Mountain Peak: ${sub.stage1Peak}\nMirror of Truth: ${sub.stage2Reflection}\nPocket Lesson: ${sub.stage3PocketLesson}</div>
+        <div class="rounded-2xl bg-cosmic-900/95 border border-cyan-400/40 p-4 space-y-2.5">
+          <div class="text-xs font-extrabold text-amber-300 uppercase tracking-wider">Complete 10-Stage Reflections</div>
+          <div class="text-xs text-white space-y-2 leading-relaxed">
+            <div><strong class="text-cyan-300">Stage 1 (Mountain Peak):</strong> ${escapeHtml(sub.stage1Peak || '-')} ${sub.stage1Note ? `— ${escapeHtml(sub.stage1Note)}` : ''}</div>
+            <div><strong class="text-cyan-300">Stage 2 (Mirror of Truth):</strong> ${escapeHtml((sub.stage2HabitsTags || []).join(', '))} — ${escapeHtml(sub.stage2Reflection || '-')}</div>
+            <div><strong class="text-cyan-300">Stage 3 (Leadership Story):</strong> Shaped by: ${escapeHtml(sub.stage3ShapedBy || '-')} | Pocket Lesson: "${escapeHtml(sub.stage3PocketLesson || '-')}"</div>
+            <div><strong class="text-cyan-300">Stage 4 (Timeline):</strong> Role: ${escapeHtml(sub.stage4FirstRole || '-')} | Feeling: ${escapeHtml(sub.stage4FirstFeeling || '-')} | Crisis: ${escapeHtml(sub.stage4Challenge || '-')} | Mistake: ${escapeHtml(sub.stage4Mistake || '-')} | Lesson: ${escapeHtml(sub.stage4Lesson || '-')}</div>
+            <div><strong class="text-cyan-300">Stage 5 (Fingerprint):</strong> Impact: ${escapeHtml(sub.stage5ImpactMoment || '-')} | Core Value: ${escapeHtml(sub.stage5CoreValue || '-')} | Team Belief: ${escapeHtml(sub.stage5TeamBelief || '-')}</div>
+            <div><strong class="text-cyan-300">Stage 6 (Where I Stand):</strong> Strengths: ${escapeHtml(sub.stage6Strengths || '-')} | Rely On: ${escapeHtml((sub.stage6RelyChips || []).join(', '))} | 3 Words: ${escapeHtml(sub.stage6ThreeWords || '-')} | Under Pressure: ${escapeHtml(sub.stage6PressureChoice || '-')}</div>
+            <div><strong class="text-cyan-300">Stage 7 (Leader I Want to Be):</strong> Courage Action: ${escapeHtml(sub.stage7CourageNextMonth || '-')} | Success: ${escapeHtml(sub.stage7SuccessPicture || '-')} | Legacy: ${escapeHtml(sub.stage7Legacy || '-')}</div>
+            <div><strong class="text-cyan-300">Stage 8 (Values Under Pressure):</strong> Option ${escapeHtml(sub.stage8Option || '-')}</div>
+            <div><strong class="text-cyan-300">Stage 9 & 10 (Johari Window):</strong> Open Area: ${escapeHtml(sub.stage9OpenArea || '-')} | Feedback: ${escapeHtml(sub.stage9BlindSpotFeedback || '-')} | Facade: ${escapeHtml(sub.stage9FacadeHiddenGood || '-')} | Hidden Potential: ${escapeHtml(sub.stage9UndiscoveredPotential || '-')}</div>
+          </div>
         </div>
       `;
       document.getElementById('modalManagerDetail').classList.remove('hidden');
@@ -2085,8 +2320,8 @@
 
     window.exportSubmissionsToCSV = function () {
       const subs = getAllActiveSubmissions();
-      const headers = ['Name', 'Position', 'Age', 'Email', 'Phone', 'District', 'Stage1_Peak', 'Stage3_PocketLesson'];
-      const rows = subs.map(s => [s.name, s.position, s.age, s.email, s.phone, s.district, s.stage1Peak, s.stage3PocketLesson].map(v => `"${String(v ?? '').replace(/"/g, '""')}"`).join(','));
+      const headers = ['Name', 'Email', 'Phone', 'Employment_Level', 'Job_Description', 'Location_District', 'Age', 'Experience', 'Stage1_Peak', 'Stage3_PocketLesson', 'Stage6_Pressure', 'Stage8_Option'];
+      const rows = subs.map(s => [s.name, s.email, s.phone, s.position, s.jobDescription, s.district, s.age, s.experience, s.stage1Peak, s.stage3PocketLesson, s.stage6PressureChoice, s.stage8Option].map(v => `"${String(v ?? '').replace(/"/g, '""')}"`).join(','));
       const csvContent = '\uFEFF' + [headers.join(','), ...rows].join('\n');
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
